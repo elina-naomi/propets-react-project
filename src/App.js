@@ -1,25 +1,30 @@
-import logo from './logo.svg';
 import './App.css';
+import React, {useState} from 'react';
+import Start from "./components/Start";
+import SignUpModal from "./components/SignUpModal";
+import {Route, Switch} from "react-router-dom";
+import {foundPage, homePage, lostPage, mainPage} from "./utils/Constants";
+import Main from "./components/Main";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App = () => {
+    const [modalShow, setModalShow] = useState(false);
+
+    return (
+        <div>
+            <Switch>
+                <Route path={['/', `/${homePage}`]} exact><Start signIn={()=> {setModalShow(true)}}/></Route>
+                <Route path={[`/${mainPage}`]} exact><Main colQuantity='col-7'
+                                                           bcFluid='greenBack'/></Route>
+                <Route path={[`/${lostPage}`,`/${foundPage}`]} exact><Main colQuantity='col-10'
+                                                                           bcFluid='greenWhiteBack'
+                                                                           isShow='display-none'/></Route>
+
+            </Switch>
+
+            <SignUpModal show={modalShow} onHide={() => setModalShow(false)}/>
+        </div>
+
+    );
+};
 
 export default App;

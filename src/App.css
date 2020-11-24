@@ -1,38 +1,482 @@
-.App {
-  text-align: center;
+
+
+/*Navigation bar on start page*/
+
+@media (max-width: 575px) {
+    .navbar {
+        justify-content: flex-end;
+        flex-direction: row-reverse;
+    }
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.navbar {
+    background-color: transparent !important;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.nav-wrapper {
+    background-color: #669885;
+    box-shadow: 0 3px 6px #00000029;
+    position: relative;
+    z-index: 1000;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+
+
+/*Navigation icon - burger*/
+
+.start-burger {
+    border-color: transparent !important;
+    outline: transparent !important;
 }
 
-.App-link {
-  color: #61dafb;
+.start-burger .navbar-toggler-icon {
+    background-image: url(./images/001-menu.svg);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.greenBurger .navbar-toggler-icon {
+    background-image: url(./images/001-menu-green.svg);
+
 }
+
+/*Sign in button*/
+
+.sign-in-button {
+    /*outline: 1px solid white;*/
+    background-color: transparent;
+    padding: 0.25em 1.7em !important;
+    color: white !important;
+    border: 1px solid #FFFFFF;
+    border-radius: 17px;
+    opacity: 1;
+    font-weight: 500;
+    width: max-content;
+
+}
+
+.sign-in-button:hover {
+    background-color: #ffe18b;
+    color: #393939 !important;
+    border-color: #FFE18B;
+}
+
+.sign-in-button:focus {
+    box-shadow: 0 0 0 0.2rem rgba(255, 225, 139, .5);
+}
+
+/*Main slider wrapper on start page*/
+
+
+.main-wrapper h1 {
+    font-size: 3.5em;
+}
+
+/*for medium screens*/
+@media (max-width: 991px) {
+    .main-wrapper h1 {
+        font-size: 2.3em;
+        line-height: 1.5em;
+    }
+}
+
+/*for small and xs screens*/
+
+@media (max-width: 767px) {
+    .main-wrapper h1 {
+        font-size: 1.4em;
+        line-height: 1.5em;
+        margin-bottom: 10em !important;
+    }
+}
+
+.main-wrapper h1 > span {
+    color: #669885;
+}
+
+/*Puppy background*/
+
+.main-puppy {
+    background-image: url(./images/puppy-bg-2x.png);
+    background-position: 90% 100%;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+@media (min-width: 1200px) {
+    .main-puppy {
+        background-position: calc(100vw / 2) /* 0px from the right */ 100%;
+    }
+}
+
+/*for medium screens*/
+@media (max-width: 991px) {
+    .main-puppy {
+        background-position: 90% 0;
+        background-size: 27em auto;
+    }
+}
+
+/*for small screens*/
+@media (max-width: 767px) {
+    .main-puppy {
+        background-position: 100% 80%;
+        background-size: 22em auto;
+    }
+}
+
+/*for xs screens*/
+@media (max-width: 575px) {
+    .main-puppy {
+        background-position: 5em 70%;
+        background-size: 20.8em auto;
+    }
+}
+
+/*Buttons*/
+
+.lost-button-wrapper {
+    background: linear-gradient(to right, #ffe18b 45%, transparent 45%);
+    position: relative;
+    z-index: 100;
+}
+
+.lost-button:hover {
+    background-color: #ffd96a;
+}
+
+.wrapper-lost-button-hover {
+    background: linear-gradient(to right, #ffd96a 45%, transparent 45%);
+}
+
+.lost-button-wrapper .container-xl {
+    /*background-color: white;*/
+    background: linear-gradient(to right, white 45%, transparent 45%);
+}
+
+.lost-button {
+    background-color: #FFE18B;
+    border-radius: 0 50px 50px 0;
+    cursor: pointer;
+}
+
+.lost-button h2 {
+    margin: 0;
+    color: #393939;
+    line-height: 2.4rem;
+}
+
+.lost-button-wrapper a {
+    color: #393939;
+    text-decoration: none;
+}
+
+.icon-search {
+    width: 79px;
+}
+
+.found-button-wrapper {
+    background: linear-gradient(to right, #84B6A3 45%, transparent 45%);
+    bottom: 0.5em;
+    position: relative;
+}
+
+.found-button-wrapper .container-xl {
+    /*background-color: white;*/
+    background: linear-gradient(to right, white 45%, transparent 45%);
+}
+
+.found-button {
+    background-color: #84B6A3;
+    border-radius: 0 50px 50px 0;
+    cursor: pointer;
+
+}
+
+.found-button:hover {
+    background-color: #669885;
+}
+
+.wrapper-found-button-hover {
+    background: linear-gradient(to right, #669885 45%, transparent 45%);
+}
+
+.button-col-outer {
+    padding: 0;
+}
+
+.found-button-wrapper a {
+    color: white;
+    text-decoration: none;
+}
+
+.found-button h2 {
+    color: white;
+    margin: 0;
+    padding-top: 0.2em;
+    line-height: 2.4rem;
+}
+
+.lost-button .icon-search {
+    position: absolute;
+    bottom: -0.2em;
+    right: 0;
+}
+
+/*for medium screens*/
+@media (max-width: 991px) {
+    .found-button h2, .lost-button h2 {
+        font-size: 1.8em;
+    }
+}
+
+/*for small and xs screens*/
+
+@media (max-width: 767px) {
+    .found-button h2, .lost-button h2 {
+        font-size: 1.15em;
+        line-height: 1em;
+    }
+
+    .icon-search {
+        width: 60px;
+    }
+}
+
+/*Text of buttons with changes*/
+
+.text-with-link {
+    font-weight: 500;
+}
+
+.text-with-link span {
+    color: #84B6A3;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+@media (max-width: 767px) {
+    .text-with-link {
+        font-size: 0.9em;
+        line-height: 1;
+    }
+}
+
+/*Medium devices (tablets, 768px and up)*/
+@media (min-width: 768px) and (max-width: 991px) {
+    .lost-button-wrapper > .container-xl > .row > .col-md-5,
+    .found-button-wrapper > .container-xl > .row > .col-md-4 {
+        transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .lost-button-wrapper > .container-xl > .row > .col-md-5:hover {
+        flex: 0 0 48%;
+        max-width: 48%;
+        transform: scale(1.07);
+        transform-origin: 0 100% 0;
+    }
+
+    .found-button-wrapper > .container-xl > .row > .col-md-4:hover {
+        flex: 0 0 36%;
+        max-width: 36%;
+        transform: scale(1.07);
+        transform-origin: 0 100% 0;
+    }
+
+
+}
+
+/*Green block after main slider on start page*/
+
+.green-wrapper {
+    background-color: #669885;
+}
+
+.green-wrapper h2 {
+    color: white;
+    line-height: 1.5;
+}
+
+/*for medium screens*/
+@media (max-width: 991px) {
+    .green-wrapper h2 {
+        font-size: 1.5em;
+        line-height: 2em;
+    }
+}
+
+/*for small and xs screens*/
+
+@media (max-width: 767px) {
+    .green-wrapper h2 {
+        font-size: 1.1em;
+        line-height: 1.7em;
+    }
+}
+
+/*Block after green block with pet need items on start page*/
+
+.list-pet-needs-wrapper h3 {
+    font-weight: 600;
+    color: #669885;
+    font-size: 1.5em;
+    line-height: 1.9em;
+}
+
+
+/*List items*/
+
+.list-pet-needs-wrapper ul, li {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.list-pet-needs-wrapper ul {
+    line-height: 2.3em;
+    margin: 1.2em 0;
+}
+
+.list-pet-needs-wrapper ul > li {
+    font-size: 1.125em;
+    margin-left: 1.8em;
+}
+
+.list-point {
+    color: #84B6A3;
+    margin-left: -1.8em;
+    margin-right: 1em;
+}
+
+@media (max-width: 767px) {
+
+    .list-pet-needs-wrapper h3 {
+        font-size: 1.1em;
+        line-height: 1.5em;
+    }
+
+    .list-pet-needs-wrapper ul {
+        line-height: 1.5em;
+    }
+
+    .list-pet-needs-wrapper ul > li {
+        font-size: 1em;
+    }
+
+    .list-point {
+        font-size: 0.9em;
+    }
+}
+
+/*Orange block*/
+.orange-wrapper {
+    background-color: #FF6F61;
+}
+
+.orange-wrapper h2 {
+    color: white;
+    font-size: 3.5em;
+    margin: 0;
+}
+
+.orange-wrapper p {
+    color: white;
+    font-weight: 600;
+    margin: 0;
+}
+
+/*Icon visibility only on xl-screens*/
+@media (max-width: 1199px) {
+    .heart-icon-wrapper {
+        display: none;
+    }
+}
+
+/*for medium screens*/
+@media (max-width: 991px) {
+    .orange-wrapper h2 {
+        font-size: 2em;
+    }
+}
+
+/*for small and xs screens*/
+@media (max-width: 767px) {
+    .orange-wrapper .divider {
+        display: none;
+    }
+}
+
+
+/*Footer*/
+
+.footer-wrapper {
+    background-color: #669885;
+}
+
+.footer-wrapper .logo {
+    height: 47px;
+}
+
+/*for medium screens*/
+@media (max-width: 991px) {
+    .footer-wrapper .logo {
+        height: 30px;
+    }
+}
+
+.footer-wrapper .fab {
+    color: white;
+    font-size: 1.8em;
+    margin-right: 0.5em;
+}
+
+.footer-wrapper .address {
+    font-size: 0.75em;
+    color: white;
+    letter-spacing: 0.01em;
+    line-height: 1.2;
+    margin-top: 1.2em;
+}
+
+.footer-wrapper ul {
+    list-style-type: none;
+    color: white;
+    line-height: 1.8;
+}
+
+.footer-wrapper li {
+    text-indent: -2em;
+    cursor: pointer;
+}
+
+/*.footer-wrapper li a {*/
+/*    color: white;*/
+/*    text-decoration: none;*/
+/*}*/
+
+/*for small and xs screens*/
+@media (max-width: 767px) {
+    p.address {
+        position: absolute;
+        top: 24.5em;
+        padding: 0 0.5em;
+    }
+
+    .footer-wrapper {
+        padding-bottom: 4.5em;
+    }
+}
+
+/*Sign up*/
+.signUpWindowModal .nav-link {
+    text-align: center !important;
+    color: white;
+    border-radius: 0px !important;
+    font-weight: bold;
+    background-color: rgba(132,182,163,0.28);
+    border-top: 1px solid #84B6A3;
+
+}
+
+.signUpWindowModal .nav-link.active {
+    background-color: #84B6A3 !important;
+}
+

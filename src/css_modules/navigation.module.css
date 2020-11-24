@@ -1,0 +1,25 @@
+.sideBarNav {
+    color: white;
+    line-height: 2em;
+}
+
+/*.activeLink {*/
+/*    background-color: white;*/
+/*    border-radius: 0 24px 24px 0;*/
+/*    color: #84B6A3;*/
+/*    margin-left: -1000em;*/
+/*    padding-left: 1000em;*/
+
+/*}*/
+
+.linkItem {
+    display: block;
+}
+
+:global .leftNavigation .active {
+    background-color: white;
+    border-radius: 0 24px 24px 0;
+    color: #84B6A3 !important;
+    margin-left: -1000em;
+    padding-left: 1000em;
+}
