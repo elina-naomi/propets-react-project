@@ -2,6 +2,16 @@ export const homePage = 'home';
 export const mainPage = 'main';
 export const lostPage = 'lost';
 export const foundPage = 'found';
+export const favouritesPage = 'favourites';
+
+export const servicesPage = 'services';
+export const hotelsPage = 'hotels';
+export const walkingPage = 'walking';
+export const fosteringPage = 'fostering';
+export const vethelpPage = 'vethelp';
+
+
+
 
 
 

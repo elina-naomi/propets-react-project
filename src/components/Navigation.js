@@ -1,76 +1,186 @@
-import React from 'react';
-import {NavDropdown, Nav, NavItem} from "react-bootstrap";
+import React, {useEffect, useState} from 'react';
+import {Nav, NavItem} from "react-bootstrap";
 import styles from "../css_modules/navigation.module.css";
 import {Link} from "react-router-dom";
-import {FaBullhorn, FaHome, FaPaw, FaSearch, FaStar} from "react-icons/all";
+import {FaBullhorn, FaDog, FaHome, FaHotel, FaPaw, FaSearch, FaStar, FaStethoscope, FaWalking} from "react-icons/all";
+import {
+    favouritesPage,
+    fosteringPage,
+    foundPage,
+    hotelsPage,
+    lostPage,
+    mainPage,
+    servicesPage,
+    vethelpPage,
+    walkingPage
+} from "../utils/Constants";
 
 const Navigation = () => {
+    // При обновлении страницы чтобы соответствующий пункт навигации тоже выделялся
+    const pathArray = window.location.href.split('/');
+    const path = pathArray[pathArray.length - 1];
+
+
+    const services = ['services', 'hotels', 'walking', 'fostering', 'vethelp'];
+
+    const [submenuExpanded, setSubmenuExpanded] = useState({
+        display: 'd-none',
+        greenWrapper: '',
+        servicesItem: ''
+    })
+
+    useEffect(()=> {
+        console.log('Component Home is mounted');
+        if(path==='hotels'||path==='walking'||path==='fostering'||path==='vethelp') {
+            setSubmenuExpanded({
+                display: '',
+                greenWrapper: 'greenWrapper',
+                servicesItem: 'servicesItem'
+            })
+        }
+        return ()=> console.log('Component Home is unmounted');
+    },[path]);
+
+
     return (
         <Nav
+            onSelect={(selectedKey) => {
+                if (selectedKey === "services") {
+                    setSubmenuExpanded({
+                        display: '',
+                        greenWrapper: 'greenWrapper',
+                        servicesItem: 'servicesItem'
+                    })
+                }
+                // Проверка, что не нажат пункт меню, не входящий в Services. Если так, скрыть подменю
+                let res = false;
+                for (let i = 0; i < services.length; i++) {
+                    res = res || selectedKey === services[i];
+                    if (res) {
+                        break;
+                    }
+                }
+                if (!res) {
+                    setSubmenuExpanded({
+                        display: 'd-none',
+                        greenWrapper: '',
+                        servicesItem: ''
+                    });
+                }
+
+
+            }}
             as='ul'
-            defaultActiveKey="link-0"
+            defaultActiveKey={path}
             bsPrefix={`${styles.sideBarNav} my-3 pl-0`}
             className='leftNavigation'>
             <NavItem as='li'>
                 <Nav.Link bsPrefix={styles.linkItem}
-                          className='py-1 text-white'
+                          className='py-1 text-white  text-decoration-none'
                           as={Link}
-                          eventKey="link-0"
-                          to="/main">
+                          eventKey="main"
+                          to={`/${mainPage}`}>
                     <FaHome className='mr-3'/>Home
                 </Nav.Link>
             </NavItem>
             <NavItem as='li'>
                 <Nav.Link bsPrefix={styles.linkItem}
-                          className='py-1 text-white'
+                          className='py-1 text-white  text-decoration-none'
                           as={Link}
-                          eventKey="link-1"
-                          to="/lost">
+                          eventKey="lost"
+                          to={`/${lostPage}`}>
                     <FaSearch className='mr-3'/>Lost
                 </Nav.Link>
             </NavItem>
 
             <NavItem as='li'>
                 <Nav.Link bsPrefix={styles.linkItem}
-                          className='py-1 text-white'
+                          className='py-1 text-white  text-decoration-none'
                           as={Link}
-                          eventKey="link-2"
-                          to="/found">
+                          eventKey="found"
+                          to={`/${foundPage}`}>
                     <FaPaw className='mr-3'/>Found
                 </Nav.Link>
             </NavItem>
 
 
             <NavItem as='li'>
-                <Nav.Link bsPrefix={styles.linkItem}
-                          className='py-1 text-white'
-                          as={Link}
-                          eventKey="link-3"
-                          // to="/main"
-                >
-                    <FaBullhorn className='mr-3'/>Services
-                </Nav.Link>
-            </NavItem>
-            {/*<NavItem as='li'>*/}
 
-            {/*    <NavDropdown bsPrefix={styles.linkItem} className='py-1 text-white' title="Services" id="nav-dropdown">*/}
-            {/*        <NavDropdown.Item eventKey="4.1">Action</NavDropdown.Item>*/}
-            {/*        <NavDropdown.Item eventKey="4.2">Another action</NavDropdown.Item>*/}
-            {/*        <NavDropdown.Item eventKey="4.3">Something else here</NavDropdown.Item>*/}
-            {/*        <NavDropdown.Divider/>*/}
-            {/*        <NavDropdown.Item eventKey="4.4">Separated link</NavDropdown.Item>*/}
-            {/*    </NavDropdown>*/}
-            {/*</NavItem>*/}
+                <div className={styles[submenuExpanded.greenWrapper]}>
+
+                    <Nav.Link bsPrefix={styles.linkItem}
+                              className='text-white text-decoration-none'
+                              as={Link}
+                              eventKey="services">
+
+                        <div className={`py-1 ${styles[submenuExpanded.servicesItem]}`}>
+
+                            <FaBullhorn className='mr-3'/>Services
+                        </div>
+
+
+                    </Nav.Link>
+                    <Nav bsPrefix={styles.linkItem}
+                         defaultActiveKey={path}
+                         className={`py-1 text-white 
+                         ${styles.subMenu} subMenu 
+                         ${submenuExpanded.display}`}
+                         as='ul'
+                    >
+                        <NavItem as='li'>
+                            <Nav.Link bsPrefix={styles.linkItem}
+                                      className='pt-1 text-white text-decoration-none'
+                                      as={Link}
+                                      eventKey="hotels"
+                                      to={`/${servicesPage}/${hotelsPage}`}>
+                                <FaHotel className='mr-3'/>Hotels
+                            </Nav.Link>
+                        </NavItem>
+
+                        <NavItem as='li'>
+                            <Nav.Link bsPrefix={styles.linkItem}
+                                      className='text-white text-decoration-none'
+                                      as={Link}
+                                      eventKey="walking"
+                                      to={`/${servicesPage}/${walkingPage}`}>
+                                <FaWalking className='mr-3'/>Walking
+                            </Nav.Link>
+                        </NavItem>
+
+                        <NavItem as='li'>
+                            <Nav.Link bsPrefix={styles.linkItem}
+                                      className='text-white text-decoration-none'
+                                      as={Link}
+                                      eventKey="fostering"
+                                      to={`/${servicesPage}/${fosteringPage}`}>
+                                <FaDog className='mr-3'/>Fostering
+                            </Nav.Link>
+                        </NavItem>
+
+                        <NavItem as='li'>
+                            <Nav.Link bsPrefix={styles.linkItem}
+                                      className='pb-1 text-white text-decoration-none'
+                                      as={Link}
+                                      eventKey="vethelp"
+                                      to={`/${servicesPage}/${vethelpPage}`}>
+                                <FaStethoscope className='mr-3'/>VetHelp
+                            </Nav.Link>
+                        </NavItem>
+
+                    </Nav>
+                </div>
+
+
+            </NavItem>
 
 
             <NavItem as='li'>
                 <Nav.Link bsPrefix={styles.linkItem}
-                          className='py-1 text-white'
+                          className='py-1 text-white text-decoration-none'
                           as={Link}
-                          eventKey="link-4"
-                    // to="/main"
-                >
-                    <FaStar className='mr-3'/>Favorites
+                          eventKey="favourites"
+                          to={`/${favouritesPage}`}>
+                    <FaStar className='mr-3'/>Favourites
                 </Nav.Link>
             </NavItem>
 
