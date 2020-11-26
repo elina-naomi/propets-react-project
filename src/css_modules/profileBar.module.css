@@ -1,6 +1,17 @@
 .wrapper {
-    height: 200px;
     border-top: 1px solid rgba(255, 255, 255, 0.37);
     border-bottom: 1px solid rgba(255, 255, 255, 0.37);
+    color: white;
+}
 
+.avatar {
+    height: 35px;
+    width: 35px;
+    border: 1px solid white;
+    border-radius: 50%;
+}
+
+.name {
+    font-size: 0.75em;
+    margin-bottom: 0;
 }

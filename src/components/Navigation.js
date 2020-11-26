@@ -14,6 +14,10 @@ import {
     vethelpPage,
     walkingPage
 } from "../utils/Constants";
+import ButtonLogOut from "./buttons/ButtonLogOut";
+import stylesButton from '../css_modules/profileBar.module.css'
+import avatar from '../images/avatar.png'
+import ProfileBar from "./ProfileBar";
 
 const Navigation = () => {
     // При обновлении страницы чтобы соответствующий пункт навигации тоже выделялся
@@ -72,7 +76,7 @@ const Navigation = () => {
             }}
             as='ul'
             defaultActiveKey={path}
-            bsPrefix={`${styles.sideBarNav} my-3 pl-0`}
+            bsPrefix={`${styles.sideBarNav} mt-3 pl-0`}
             className='leftNavigation'>
             <NavItem as='li'>
                 <Nav.Link bsPrefix={styles.linkItem}
@@ -114,19 +118,20 @@ const Navigation = () => {
                               eventKey="services">
 
                         <div className={`py-1 ${styles[submenuExpanded.servicesItem]}`}>
-
                             <FaBullhorn className='mr-3'/>Services
                         </div>
 
-
                     </Nav.Link>
-                    <Nav bsPrefix={styles.linkItem}
+
+
+                    <Nav onSelect={eventKey => {
+
+                    }} bsPrefix={styles.linkItem}
                          defaultActiveKey={path}
                          className={`py-1 text-white 
                          ${styles.subMenu} subMenu 
                          ${submenuExpanded.display}`}
-                         as='ul'
-                    >
+                         as='ul'>
                         <NavItem as='li'>
                             <Nav.Link bsPrefix={styles.linkItem}
                                       className='pt-1 text-white text-decoration-none'
@@ -166,7 +171,6 @@ const Navigation = () => {
                                 <FaStethoscope className='mr-3'/>VetHelp
                             </Nav.Link>
                         </NavItem>
-
                     </Nav>
                 </div>
 
@@ -184,6 +188,21 @@ const Navigation = () => {
                 </Nav.Link>
             </NavItem>
 
+            {/*<NavItem as='li' className={`${stylesButton.wrapper} mt-5`}>*/}
+            {/*    <Nav.Link bsPrefix={styles.linkItem}*/}
+            {/*              className='mt-3 py-1 text-white text-decoration-none'*/}
+            {/*              as={Link}*/}
+            {/*              eventKey="profile"*/}
+            {/*              to={`/${favouritesPage}`}>*/}
+            {/*        <div className='d-flex align-items-center'>*/}
+            {/*            <img className={`${stylesButton.avatar}`} src={avatar}/>*/}
+            {/*            <p className={`${stylesButton.name} ml-2`}>Ann Smith</p>*/}
+            {/*        </div>*/}
+            {/*    </Nav.Link>*/}
+            {/*        <ButtonLogOut marginLeft='ml-4' marginTop='mt-5'/>*/}
+            {/*</NavItem>*/}
+
+            <ProfileBar marginTopProfileBar={styles.marginTopProfileBar}/>
         </Nav>
     );
 };

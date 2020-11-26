@@ -6,8 +6,6 @@ const SideBarLeft = () => {
     return (
         <div className={`col-2`}>
             <Navigation/>
-            {/*<ProfileBar/>*/}
-
         </div>
     );
 };

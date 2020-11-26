@@ -40,7 +40,6 @@
     padding-left: 1000em;
     background-color: #669885;
     border-radius: 24px;
-
 }
 
 .servicesItem {
@@ -49,4 +48,8 @@
     background-color: #ffffff;
     border-radius: 24px;
     color: #84B6A3;
+}
+
+.marginTopProfileBar {
+    margin-top: 6em;
 }

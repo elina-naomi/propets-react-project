@@ -10,7 +10,7 @@ import {
     homePage,
     hotelsPage,
     lostPage,
-    mainPage,
+    mainPage, profilePage,
     servicesPage, vethelpPage,
     walkingPage
 } from "./utils/Constants";
@@ -26,7 +26,7 @@ const App = () => {
                     setModalShow(true)
                 }}/></Route>
                 <Route
-                    path={[`/${mainPage}`, `/${favouritesPage}`, `/${servicesPage}/${hotelsPage}`, `/${servicesPage}/${walkingPage}`,
+                    path={[`/${mainPage}`, `/${profilePage}`, `/${favouritesPage}`, `/${servicesPage}/${hotelsPage}`, `/${servicesPage}/${walkingPage}`,
                         `/${servicesPage}/${fosteringPage}`, `/${servicesPage}/${vethelpPage}`]}
                     exact><Main colQuantity='col-7'
                                 bcFluid='greenBack'/></Route>
