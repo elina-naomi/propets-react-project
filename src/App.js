@@ -4,6 +4,7 @@ import Start from "./components/Start";
 import SignUpModal from "./components/SignUpModal";
 import {Route, Switch} from "react-router-dom";
 import {
+    activitiesPage,
     favouritesPage,
     fosteringPage,
     foundPage,
@@ -26,7 +27,7 @@ const App = () => {
                     setModalShow(true)
                 }}/></Route>
                 <Route
-                    path={[`/${mainPage}`, `/${profilePage}`, `/${favouritesPage}`, `/${servicesPage}/${hotelsPage}`, `/${servicesPage}/${walkingPage}`,
+                    path={[`/${mainPage}`, `/${profilePage}`,`/${activitiesPage}`, `/${favouritesPage}`, `/${servicesPage}/${hotelsPage}`, `/${servicesPage}/${walkingPage}`,
                         `/${servicesPage}/${fosteringPage}`, `/${servicesPage}/${vethelpPage}`]}
                     exact><Main colQuantity='col-7'
                                 bcFluid='greenBack'/></Route>

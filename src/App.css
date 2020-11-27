@@ -464,27 +464,3 @@
         padding-bottom: 4.5em;
     }
 }
-
-/*Sign up*/
-.signUpWindowModal .nav-link {
-    text-align: center !important;
-    color: white;
-    border-radius: 0px !important;
-    font-weight: bold;
-    background-color: rgba(132,182,163,0.28);
-    border-top: 1px solid #84B6A3;
-
-}
-
-.signUpWindowModal .nav-link.active {
-    background-color: #84B6A3 !important;
-}
-
-.anim-appear {
-    opacity: 0.01;
-}
-
-.anim-appear.anim-appear-active{
-    opacity: 2;
-    transition: opacity 5s ease-in;
-}

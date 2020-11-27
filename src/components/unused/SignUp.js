@@ -1,6 +1,6 @@
 import React from 'react';
-import styles from '../css_modules/signUp.module.css';
-import logo from '../images/Group 1-green.svg'
+import styles from '../../css_modules/tabs.module.css';
+import logo from '../../images/Group 1-green.svg'
 import {Tab, Tabs} from "react-bootstrap";
 import {FaPaw, FaTimes} from "react-icons/all";
 

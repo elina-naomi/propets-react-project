@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {Col, Container, Form, FormLabel, Modal, Row, Tab, Tabs} from "react-bootstrap";
-import styles from '../css_modules/signUp.module.css';
+import styles from '../css_modules/tabs.module.css';
 import logo from '../images/Group 1-green.svg'
 import {FaPaw} from "react-icons/all";
 
@@ -17,12 +17,10 @@ const SignUpModal = (props) => {
             // Здесь прописать эффект размытия заднего фона
             backdropClassName={`${styles.backDropBlur}`}>
             <Modal.Header closeButton className='py-3 pl-0 border-bottom-0'>
-                {/*<p className=''></p>*/}
                 <Container>
                     <Row>
                         <Col xs={4}>
                             <Modal.Title>
-
                                 <img src={logo} alt="ProPets logo"/>
                             </Modal.Title>
 
@@ -116,6 +114,7 @@ const SignUpModal = (props) => {
                         <a className={`${styles.formButton} ${styles.cancelButton} mr-sm-3`} href="#">Cancel</a>
                         <a className={`${styles.formButton} ${styles.submitButton}`} href="#">
                             <FaPaw color='white' className={`mr-3 ${styles.pawIcon}`}/>Submit</a>
+
                     </div>
 
 

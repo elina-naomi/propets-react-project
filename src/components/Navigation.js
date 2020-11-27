@@ -14,16 +14,16 @@ import {
     vethelpPage,
     walkingPage
 } from "../utils/Constants";
-import ButtonLogOut from "./buttons/ButtonLogOut";
-import stylesButton from '../css_modules/profileBar.module.css'
-import avatar from '../images/avatar.png'
 import ProfileBar from "./ProfileBar";
 
 const Navigation = () => {
     // При обновлении страницы чтобы соответствующий пункт навигации тоже выделялся
     const pathArray = window.location.href.split('/');
-    const path = pathArray[pathArray.length - 1];
-
+    let path = pathArray[pathArray.length - 1];
+    if(path==='activities') {
+        path='profile';
+    }
+    const [key, setKey] = useState(path);
 
     const services = ['services', 'hotels', 'walking', 'fostering', 'vethelp'];
 
@@ -33,22 +33,23 @@ const Navigation = () => {
         servicesItem: ''
     })
 
-    useEffect(()=> {
+    useEffect(() => {
         console.log('Component Home is mounted');
-        if(path==='hotels'||path==='walking'||path==='fostering'||path==='vethelp') {
+        if (path === 'hotels' || path === 'walking' || path === 'fostering' || path === 'vethelp') {
             setSubmenuExpanded({
                 display: '',
                 greenWrapper: 'greenWrapper',
                 servicesItem: 'servicesItem'
             })
         }
-        return ()=> console.log('Component Home is unmounted');
-    },[path]);
+        return () => console.log('Component Home is unmounted');
+    }, [path]);
 
 
     return (
         <Nav
             onSelect={(selectedKey) => {
+                setKey(selectedKey);
                 if (selectedKey === "services") {
                     setSubmenuExpanded({
                         display: '',
@@ -75,7 +76,7 @@ const Navigation = () => {
 
             }}
             as='ul'
-            defaultActiveKey={path}
+            activeKey={key}
             bsPrefix={`${styles.sideBarNav} mt-3 pl-0`}
             className='leftNavigation'>
             <NavItem as='li'>
@@ -92,7 +93,8 @@ const Navigation = () => {
                           className='py-1 text-white  text-decoration-none'
                           as={Link}
                           eventKey="lost"
-                          to={`/${lostPage}`}>
+                          to={`/${lostPage}`}
+                >
                     <FaSearch className='mr-3'/>Lost
                 </Nav.Link>
             </NavItem>
@@ -125,9 +127,10 @@ const Navigation = () => {
 
 
                     <Nav onSelect={eventKey => {
+                        setKey(eventKey)
 
                     }} bsPrefix={styles.linkItem}
-                         defaultActiveKey={path}
+                         activeKey={key}
                          className={`py-1 text-white 
                          ${styles.subMenu} subMenu 
                          ${submenuExpanded.display}`}

@@ -6,6 +6,7 @@ import {Nav, NavItem} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import {profilePage} from "../utils/Constants";
 import stylesNav from "../css_modules/navigation.module.css";
+import {FaCamera} from "react-icons/all";
 
 
 const ProfileBar = (props) => {
@@ -26,6 +27,7 @@ const ProfileBar = (props) => {
                   to={`/${profilePage}`}>
             <div className='d-flex align-items-center'>
                 <img className={`${styles.avatar}`} src={avatar}/>
+
                 <p className={`${styles.name} ml-2`}>Ann Smith</p>
             </div>
         </Nav.Link>

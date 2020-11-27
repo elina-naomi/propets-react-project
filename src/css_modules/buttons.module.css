@@ -5,13 +5,18 @@
     font-weight: 500;
     width: max-content;
     position: relative;
-
 }
 
 .addPostButton, .foundPetButton {
     background-color: #8DBFAC;
     color: white;
     border: 1px solid #8DBFAC;
+}
+
+.saveChangesButton {
+    background-color: #84B6A3;
+    color: white;
+    border: 1px solid #84B6A3;
 }
 
 .lostPetButton {
@@ -21,7 +26,7 @@
 
 }
 
-.addPostButton:hover, .foundPetButton:hover, .logoutButton:hover {
+.addPostButton:hover, .foundPetButton:hover, .logoutButton:hover, .saveChangesButton:hover {
     color: white;
 }
 
@@ -36,6 +41,10 @@
     left: 11px;
 }
 
+.saveIcon {
+    top: 7px;
+}
+
 .logoutButton {
     color: white;
     padding: 0.6em 0em 0.6em 2em;
@@ -46,26 +55,20 @@
     left: 0;
 }
 
-/*for small and xs screens*/
-/*@media (max-width: 575px) {*/
+.formButton {
+    padding: 0.6em 2.5em;
+    font-size: 0.75em;
+    border-radius: 17px;
+    font-weight: 500;
+}
 
-/*    .formButton {*/
-/*        display: block;*/
-/*        margin-bottom: 7px;*/
-/*    }*/
-/*    .subscription, .cancelButton, .submitButton {*/
-/*        margin-left: 32.8%;*/
-/*    }*/
+.outlinedButton {
+    background-color: white;
+    color: #8DBFAC;
+    border: 1px solid #8DBFAC;
 
-/*    .cancelButton {*/
-/*        padding: 0.7em 28% !important;*/
-/*    }*/
+}
 
-/*    .submitButton {*/
-/*        padding: 0.7em 27.4% !important;*/
-/*    }*/
-
-/*    .signUpTabs {*/
-/*        border-bottom: 0;*/
-/*    }*/
-/*}*/
+.outlinedButton:hover {
+    color: #8DBFAC;
+}

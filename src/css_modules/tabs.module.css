@@ -125,3 +125,22 @@
         border-bottom: 0;
     }
 }
+
+
+:global .signUpWindowModal .nav-link, :global .profileTabs .nav-link {
+    text-align: center !important;
+    color: white;
+    border-radius: 0px !important;
+    font-weight: bold;
+    background-color: rgba(132,182,163,0.28);
+
+}
+
+:global .signUpWindowModal .nav-link {
+    border-top: 1px solid #84B6A3;
+
+}
+
+:global .signUpWindowModal .nav-link.active, :global .profileTabs .nav-link.active {
+    background-color: #84B6A3 !important;
+}

@@ -4,6 +4,7 @@ export const lostPage = 'lost';
 export const foundPage = 'found';
 export const favouritesPage = 'favourites';
 export const profilePage = 'profile';
+export const activitiesPage = 'activities';
 
 export const servicesPage = 'services';
 export const hotelsPage = 'hotels';

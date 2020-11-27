@@ -7,6 +7,7 @@ import ButtonFoundPet from "./buttons/ButtonFoundPet";
 import ButtonLostPet from "./buttons/ButtonLostPet";
 import {Route, Switch} from "react-router-dom";
 import {
+    activitiesPage,
     favouritesPage,
     fosteringPage,
     foundPage,
@@ -17,7 +18,6 @@ import {
     vethelpPage,
     walkingPage
 } from "../utils/Constants";
-import Navigation from "./Navigation";
 
 const HeaderWhite = () => {
     return (

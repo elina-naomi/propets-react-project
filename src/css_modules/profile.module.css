@@ -1,0 +1,37 @@
+.shadow {
+    box-shadow: 0px 3px 6px #00000029;
+}
+
+.inputs {
+    width: 75%;
+}
+
+.avatar {
+    height: 43px;
+    width: 43px;
+    border: 1px solid white;
+    border-radius: 50%;
+}
+
+.name {
+    color: #84B6A3;
+    font-size: 1em;
+    margin-bottom: 0;
+    font-weight: 600;
+    margin-left: calc(25% - 40px - 1rem);
+}
+
+.photoIconWrapper {
+    background-color: white;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    box-shadow: 0px 3px 6px #00000029;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.profilePhoto {
+    position: relative;
+}
