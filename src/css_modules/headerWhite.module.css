@@ -1,4 +1,6 @@
 .whiteHeader {
     background-color: white;
+    position: sticky !important;
+    top: 0;
 }
 

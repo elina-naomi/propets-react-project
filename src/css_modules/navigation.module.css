@@ -1,6 +1,8 @@
 .sideBarNav {
     color: white;
     line-height: 2em;
+    position: sticky !important;
+    top: 84px;
 }
 
 /*.activeLink {*/
