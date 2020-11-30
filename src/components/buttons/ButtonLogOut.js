@@ -5,9 +5,11 @@ import {FaSignOutAlt} from "react-icons/all";
 
 const ButtonLogOut = (props) => {
     return (
-        <div className={`${props.marginLeft} ${props.marginTop}`}>
-            <a className={`${buttonStyles.functionButton} ${buttonStyles.logoutButton}`} href="#">
-                <FaSignOutAlt color='white' className={`${buttonStyles.buttonIcon} ${buttonStyles.logoutIcon}`}/>Log out</a>
+        <div className={`${props.marginLeft} ${props.marginTop}`}
+        onClick={props.logout}
+        >
+            <span className={`${buttonStyles.functionButton} ${buttonStyles.logoutButton}`}>
+                <FaSignOutAlt color='white' className={`${buttonStyles.buttonIcon} ${buttonStyles.logoutIcon}`}/>Log out</span>
         </div>
 
     );

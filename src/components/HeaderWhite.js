@@ -17,7 +17,7 @@ import {
     servicesPage,
     vethelpPage,
     walkingPage
-} from "../utils/Constants";
+} from "../utils/constants";
 
 const HeaderWhite = () => {
     return (

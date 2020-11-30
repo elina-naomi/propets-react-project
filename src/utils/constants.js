@@ -1,4 +1,4 @@
-export const homePage = 'home';
+export const startPage = 'home';
 export const mainPage = 'main';
 export const lostPage = 'lost';
 export const foundPage = 'found';
@@ -13,8 +13,8 @@ export const fosteringPage = 'fostering';
 export const vethelpPage = 'vethelp';
 
 
+export const baseUrl = 'https://app-propets-account.herokuapp.com/account/en/v1';
 
-
-
-
-export const base_url = '';
+export const createToken = (login, password) => {
+    return 'Basic ' + btoa(`${login}:${password}`);
+};

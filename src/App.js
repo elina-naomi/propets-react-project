@@ -1,46 +1,53 @@
 import './App.css';
-import React, {useState} from 'react';
-import Start from "./components/Start";
-import SignUpModal from "./components/SignUpModal";
-import {Route, Switch} from "react-router-dom";
-import {
-    activitiesPage,
-    favouritesPage,
-    fosteringPage,
-    foundPage,
-    homePage,
-    hotelsPage,
-    lostPage,
-    mainPage, profilePage,
-    servicesPage, vethelpPage,
-    walkingPage
-} from "./utils/Constants";
-import Main from "./components/Main";
+import React, {useEffect} from 'react';
+import {bindActionCreators} from "redux";
+import {connect} from "react-redux";
+import {loginAction} from "./reduxTools/actions/loginActions";
+import Home from "./reduxTools/containers/HomeContainer";
+import {Spinner} from "react-bootstrap";
 
-const App = () => {
-    const [modalShow, setModalShow] = useState(false);
+const App = (props) => {
+    const token = localStorage.getItem('token');
 
-    return (
-        <div>
-            <Switch>
-                <Route path={['/', `/${homePage}`]} exact><Start signIn={() => {
-                    setModalShow(true)
-                }}/></Route>
-                <Route
-                    path={[`/${mainPage}`, `/${profilePage}`,`/${activitiesPage}`, `/${favouritesPage}`, `/${servicesPage}/${hotelsPage}`, `/${servicesPage}/${walkingPage}`,
-                        `/${servicesPage}/${fosteringPage}`, `/${servicesPage}/${vethelpPage}`]}
-                    exact><Main colQuantity='col-7'
-                                bcFluid='greenBack'/></Route>
-                <Route path={[`/${lostPage}`, `/${foundPage}`]} exact><Main colQuantity='col-10'
-                                                                            bcFluid='greenWhiteBack'
-                                                                            isShow='display-none'/></Route>
 
-            </Switch>
+    useEffect(() => {
+        if (token) {
+            props.login(token);
+        }
+    },[]);
 
-            <SignUpModal show={modalShow} onHide={() => setModalShow(false)}/>
-        </div>
 
-    );
+    if(!token) {
+        return (
+            <Home/>
+        );
+    } else {
+        if(!props.user) {
+            return (
+                <Spinner animation="grow"/>
+            );
+        } else {
+            return (
+                <Home/>
+            );
+        }
+    }
+
+
+
 };
 
-export default App;
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators({
+        login: loginAction
+    }, dispatch)
+}
+
+function mapStateToProps(state) {
+    return {
+        message: state.message,
+        user: state.user
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

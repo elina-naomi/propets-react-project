@@ -31,9 +31,13 @@
 
 }
 
-.label {
+.label, .statusMessage {
     font-size: 0.8em;
     font-weight: 500;
+}
+
+.statusMessage {
+    color: #FF6F61;
 }
 
 .tab {
@@ -69,6 +73,7 @@
     border-radius: 17px;
     font-weight: 500;
     width: max-content;
+    outline: none !important;
 
 }
 
@@ -124,8 +129,17 @@
     .signUpTabs {
         border-bottom: 0;
     }
+
+    .statusMessageWrapper {
+        margin-left: 34%;
+        padding-left: 0;
+        max-width: 70%;
+    }
 }
 
+.spinner {
+    color: #84B6A3 !important;
+}
 
 :global .signUpWindowModal .nav-link, :global .profileTabs .nav-link {
     text-align: center !important;

@@ -5,7 +5,7 @@ import profileStyles from '../css_modules/profile.module.css';
 import avatar from "../images/avatar.png";
 import {FaCamera, FaPen, FaPencilAlt} from "react-icons/all";
 import {Link} from "react-router-dom";
-import {activitiesPage, mainPage, profilePage} from "../utils/Constants";
+import {activitiesPage, mainPage, profilePage} from "../utils/constants";
 
 const ProfileComplex = () => {
     const pathArray = window.location.href.split('/');

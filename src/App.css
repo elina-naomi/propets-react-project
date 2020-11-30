@@ -464,3 +464,14 @@
         padding-bottom: 4.5em;
     }
 }
+
+/*Spinner element*/
+.spinner-grow {
+    background-color: #84B6A3;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    position: fixed;
+}

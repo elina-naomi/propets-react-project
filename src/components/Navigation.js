@@ -13,8 +13,8 @@ import {
     servicesPage,
     vethelpPage,
     walkingPage
-} from "../utils/Constants";
-import ProfileBar from "./ProfileBar";
+} from "../utils/constants";
+import ProfileBar from "../reduxTools/containers/ProfileBarContainer";
 
 const Navigation = () => {
     // При обновлении страницы чтобы соответствующий пункт навигации тоже выделялся
@@ -34,7 +34,6 @@ const Navigation = () => {
     })
 
     useEffect(() => {
-        console.log('Component Home is mounted');
         if (path === 'hotels' || path === 'walking' || path === 'fostering' || path === 'vethelp') {
             setSubmenuExpanded({
                 display: '',

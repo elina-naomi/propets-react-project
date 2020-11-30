@@ -1,15 +1,61 @@
-import React, {useState} from 'react';
-import {Col, Container, Form, FormLabel, Modal, Row, Tab, Tabs} from "react-bootstrap";
+import React, {useEffect, useState} from 'react';
+import {Spinner, Col, Container, Form, FormLabel, Modal, Row, Tab, Tabs} from "react-bootstrap";
 import styles from '../css_modules/tabs.module.css';
 import logo from '../images/Group 1-green.svg'
 import {FaPaw} from "react-icons/all";
+import {createToken} from "../utils/constants";
 
 const SignUpModal = (props) => {
+    console.log(props);
+    const [key, setKey] = useState('signIn');
+
+    // hooks for login
+    const [enterLogin, setEnterLogin] = useState('');
+    const [password, setPassword] = useState('');
+
+    //hooks for registration
     const [name, setName] = useState('');
+
+
+
+
+
+    //сбросить значения в форме
+    function handleClickReset() {
+        setEnterLogin('');
+        setPassword('');
+    }
+
+    //при появлении токена - сбросить значения формы и скрыть модальное окно
+    useEffect(() => {
+        handleClickReset();
+        props.onHide();
+    }, [props.token]);
+
+
+    function handleClick() {
+        if (key === 'signIn') {
+            const token = createToken(enterLogin, password);
+            props.login(token);
+        }
+        else {
+            // обработчник для register
+        }
+    }
+
+    //отображать или спиннер, или мессадж об ошибке
+    function displayMessage() {
+        if (props.message === 'loading...') {
+            return <Spinner animation="border" size="sm" className={styles.spinner}/>
+        } else {
+            return <p className={styles.statusMessage}>{props.message}</p>;
+        }
+    }
 
     return (
         <Modal
             {...props}
+
             aria-labelledby="contained-modal-title-vcenter"
             centered
             dialogClassName={`${styles.width} signUpWindowModal`}
@@ -35,7 +81,12 @@ const SignUpModal = (props) => {
 
             <Modal.Body className='py-0'>
                 <div className={`${styles.signUpTabs}`}>
-                    <Tabs defaultActiveKey="signUp" id="uncontrolled-tab-example" className='row' variant='pills'>
+                    <Tabs
+                        onSelect={eventKey => setKey(eventKey)}
+                        activeKey={key}
+                        // defaultActiveKey="signUp"
+                        id="invitationForm"
+                        className='row' variant='pills'>
 
                         <Tab tabClassName={`col ml-3 ${styles.tab}`} eventKey="signUp" title="Sign Up">
                             <div className='row align-items-end'>
@@ -44,16 +95,18 @@ const SignUpModal = (props) => {
                                         <div>
                                             <FormLabel htmlFor='registerName'
                                                        className={`${styles.label}`}>Name:</FormLabel>
-                                            <input id='registerName' value={name} type='text' placeholder='Enter your name'
+                                            <input id='registerName' value={name} type='text'
+                                                   placeholder='Enter your name'
                                                    className={`ml-3 ${styles.inputs}`} onChange={event => {
-                                                       setName(event.target.value);
+                                                setName(event.target.value);
                                                 console.log(name);
                                             }}/>
                                         </div>
                                         <div>
                                             <FormLabel htmlFor='registerEmail'
                                                        className={`${styles.label}`}>Email:</FormLabel>
-                                            <input id='registerEmail' type='text' placeholder='Enter your email'
+                                            <input id='registerEmail'
+                                                   type='text' placeholder='Enter your email'
                                                    className={`ml-3 ${styles.inputs}`}/></div>
                                         <div>
                                             <FormLabel htmlFor='registerPassword'
@@ -80,22 +133,32 @@ const SignUpModal = (props) => {
                                 </div>
                             </div>
                         </Tab>
+
                         <Tab tabClassName={`col mr-3 ${styles.tab}`} eventKey="signIn" title="Sign In">
-                            <div className='row'>
+                            <div className='row align-items-center'>
                                 <div className='col-sm-6 col-12 '>
                                     <div className='w-100 my-5 pr-2 pt-2 text-right'>
 
                                         <div><FormLabel htmlFor='loginEmail'
                                                         className={`${styles.label}`}>Email:</FormLabel>
-                                            <input id='loginEmail' type='text' placeholder='Enter your email'
+                                            <input id='loginEmail'
+                                                   value={enterLogin}
+                                                   onChange={event => setEnterLogin(event.target.value)}
+                                                   type='text' placeholder='Enter your email'
                                                    className={`ml-3 ${styles.inputs}`}/></div>
                                         <div><FormLabel htmlFor='loginPassword'
                                                         className={`${styles.label}`}>Password:</FormLabel>
-                                            <input id='loginPassword' type='password' placeholder='Enter your password'
+                                            <input id='loginPassword'
+                                                   value={password}
+                                                   onChange={event => setPassword(event.target.value)}
+                                                   type='password' placeholder='Enter your password'
                                                    className={`ml-3 ${styles.inputs}`}/></div>
                                     </div>
                                     <a href='#' className={`${styles.subscription} ml-sm-5 pl-sm-5`}>Forgot
                                         password?</a>
+                                </div>
+                                <div className={`col-sm-6 col-12 ${styles.statusMessageWrapper}`}>
+                                    {displayMessage()}
                                 </div>
                             </div>
                         </Tab>
@@ -111,13 +174,14 @@ const SignUpModal = (props) => {
                                 terms.</a></p>
                     </div>
                     <div className='col-sm-6 col-12 text-sm-right d-flex flex-wrap-reverse flex-sm-wrap'>
-                        <a className={`${styles.formButton} ${styles.cancelButton} mr-sm-3`} href="#">Cancel</a>
-                        <a className={`${styles.formButton} ${styles.submitButton}`} href="#">
-                            <FaPaw color='white' className={`mr-3 ${styles.pawIcon}`}/>Submit</a>
-
+                        <button className={`${styles.formButton} ${styles.cancelButton} mr-sm-3`}
+                                onClick={props.onHide}>Cancel
+                        </button>
+                        <button className={`${styles.formButton} ${styles.submitButton}`}
+                                onClick={handleClick}>
+                            <FaPaw color='white' className={`mr-3 ${styles.pawIcon}`}/>Submit
+                        </button>
                     </div>
-
-
                 </div>
             </Modal.Footer>
         </Modal>
