@@ -29,27 +29,43 @@ export const successLoginAction = (user, token) => (
 )
 
 export const loginAction = (token) => {
+    let newToken='';
+    let headers ='';
+    const flag = token.toString().includes('Basic');
+    if(flag) {
+        headers = {
+            'Content-Type': 'application/json',
+            'Authorization': token
+        }
+    } else {
+        headers = {
+            'Content-Type': 'application/json',
+            'X-Token': token
+        }
+    }
     return dispatch => {
         dispatch(requestLoginAction());
 
+        console.log(token);
+
         fetch(`${baseUrl}/login`, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': token
-            }
+            headers
         })
             .then(response => {
                 if (response.ok) {
+                    if (flag) {
+                        newToken = response.headers.get('X-Token');
+                    } else {
+                        newToken = token;
+                    }
                     return response.json()
                 } else {
                     throw new Error('' + response.status);
                 }
             })
             .then(data => {
-                // пусть будет в reducere
-                // localStorage.setItem('token', JSON.stringify(token));
-                dispatch(successLoginAction(data, token));
+                dispatch(successLoginAction(data, newToken));
 
             })
             .catch(e => {

@@ -15,15 +15,24 @@ const SignUpModal = (props) => {
 
     //hooks for registration
     const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [passwordRegister, setPasswordRegister] = useState('');
+    const [passwordConfirm, setPasswordConfirm] = useState('');
 
 
-
+    const [confirmPasswordMessage, setConfirmPasswordMessage] = useState('');
 
 
     //сбросить значения в форме
     function handleClickReset() {
         setEnterLogin('');
         setPassword('');
+
+        setName('');
+        setEmail('');
+        setPasswordRegister('');
+        setPasswordConfirm('');
+        setConfirmPasswordMessage('');
     }
 
     //при появлении токена - сбросить значения формы и скрыть модальное окно
@@ -34,23 +43,49 @@ const SignUpModal = (props) => {
 
 
     function handleClick() {
+        setConfirmPasswordMessage('');
+        console.log('handleClick');
         if (key === 'signIn') {
             const token = createToken(enterLogin, password);
             props.login(token);
         }
         else {
             // обработчник для register
+            console.log('handleClick - register');
+            console.log(passwordConfirm);
+            console.log(passwordRegister);
+            if (passwordRegister===passwordConfirm) {
+                console.log('passwordRegister===passwordConfirm');
+
+                const user = {
+                    password: passwordRegister,
+                    userLogin: email,
+                    userName: name
+                }
+                props.register(user);
+            } else {
+                console.log('!passwordRegister===passwordConfirm');
+                // displayMessage('confirmMessage');
+                setConfirmPasswordMessage('Passwords do not match. Please try again.')
+            }
+
         }
     }
 
     //отображать или спиннер, или мессадж об ошибке
-    function displayMessage() {
-        if (props.message === 'loading...') {
+    function displayMessage(messageName) {
+
+        if (props[messageName] === 'loading...') {
             return <Spinner animation="border" size="sm" className={styles.spinner}/>
         } else {
-            return <p className={styles.statusMessage}>{props.message}</p>;
+            if (confirmPasswordMessage) {
+                return <p className={styles.statusMessage}>{confirmPasswordMessage}</p>;
+            } else {
+                return <p className={styles.statusMessage}>{props[messageName]}</p>;
+            }
         }
     }
+
 
     return (
         <Modal
@@ -97,34 +132,41 @@ const SignUpModal = (props) => {
                                                        className={`${styles.label}`}>Name:</FormLabel>
                                             <input id='registerName' value={name} type='text'
                                                    placeholder='Enter your name'
-                                                   className={`ml-3 ${styles.inputs}`} onChange={event => {
-                                                setName(event.target.value);
-                                                console.log(name);
-                                            }}/>
+                                                   className={`ml-3 ${styles.inputs}`}
+                                                   onChange={event => {setName(event.target.value)}}/>
                                         </div>
                                         <div>
                                             <FormLabel htmlFor='registerEmail'
                                                        className={`${styles.label}`}>Email:</FormLabel>
                                             <input id='registerEmail'
                                                    type='text' placeholder='Enter your email'
-                                                   className={`ml-3 ${styles.inputs}`}/></div>
+                                                   className={`ml-3 ${styles.inputs}`}
+                                                   onChange={event => {setEmail(event.target.value)}}/>
+                                        </div>
                                         <div>
                                             <FormLabel htmlFor='registerPassword'
                                                        className={`${styles.label}`}>Password:</FormLabel>
                                             <input id='registerPassword' type='password'
                                                    placeholder='Enter your password'
-                                                   className={`ml-3 ${styles.inputs}`}/></div>
+                                                   className={`ml-3 ${styles.inputs}`}
+                                                   onChange={event => {setPasswordRegister(event.target.value)}}/>
+                                            </div>
                                         <div>
                                             <FormLabel htmlFor='repeatRegisterPassword' className={`${styles.label}`}>Password:
                                             </FormLabel>
                                             <input id='repeatRegisterPassword' type='password'
                                                    placeholder='Repeat password'
-                                                   className={`ml-3 ${styles.inputs}`}/></div>
+                                                   className={`ml-3 ${styles.inputs}`}
+                                                   onChange={event => {setPasswordConfirm(event.target.value)}}/>
+                                            </div>
                                     </Form>
 
                                 </div>
 
                                 <div className='col-sm-6 col-12 mb-sm-1 my-3'>
+                                    <div className={`${styles.statusMessageWrapper}`}>
+                                        {displayMessage('messageRegister')}
+                                    </div>
                                     <p className={`${styles.subscription}`}>Password must have at least 8 characters
                                         with at least one Capital letter, at least one lower case letter and at
                                         least
@@ -158,7 +200,7 @@ const SignUpModal = (props) => {
                                         password?</a>
                                 </div>
                                 <div className={`col-sm-6 col-12 ${styles.statusMessageWrapper}`}>
-                                    {displayMessage()}
+                                    {displayMessage('messageLogin')}
                                 </div>
                             </div>
                         </Tab>

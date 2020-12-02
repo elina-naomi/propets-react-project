@@ -9,9 +9,11 @@ import {Spinner} from "react-bootstrap";
 const App = (props) => {
     const token = localStorage.getItem('token');
 
+    console.log(props);
 
     useEffect(() => {
         if (token) {
+            console.log(token);
             props.login(token);
         }
     },[]);
@@ -32,9 +34,6 @@ const App = (props) => {
             );
         }
     }
-
-
-
 };
 
 function mapDispatchToProps(dispatch) {

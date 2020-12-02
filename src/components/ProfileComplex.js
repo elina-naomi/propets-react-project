@@ -1,21 +1,23 @@
 import React, {useState} from 'react';
 import styles from "../css_modules/tabs.module.css";
-import {Nav, Form, FormLabel, Modal, Tab, Tabs} from "react-bootstrap";
+import {Form, FormLabel, Nav, Tab} from "react-bootstrap";
 import profileStyles from '../css_modules/profile.module.css';
-import avatar from "../images/avatar.png";
-import {FaCamera, FaPen, FaPencilAlt} from "react-icons/all";
+import {FaCamera, FaPencilAlt} from "react-icons/all";
 import {Link} from "react-router-dom";
-import {activitiesPage, mainPage, profilePage} from "../utils/constants";
+import {activitiesPage, profilePage} from "../utils/constants";
 
-const ProfileComplex = () => {
+
+const ProfileComplex = (props) => {
     const pathArray = window.location.href.split('/');
     const path = pathArray[pathArray.length - 1];
     const [key, setKey] = useState(path);
 
-    const [name, setName] = useState('Ann Smith');
-    const [email, setEmail] = useState('annsmith@gmail.com');
-    const [phone, setPhone] = useState('');
-    const [fbLink, setFbLink] = useState('');
+    const [name, setName] = useState(props.userName);
+    const [email, setEmail] = useState(props.email);
+    const [phone, setPhone] = useState(props.phone);
+    const [fbLink, setFbLink] = useState(props.fblink);
+    const [avatar, setAvatar] = useState(props.avatar);
+
 
 
     return (
@@ -50,7 +52,7 @@ const ProfileComplex = () => {
                                 <div className='col-sm-8 col-12 text-right align-self-stretch'>
                                     <div className={`d-flex align-items-center ml-3 mt-4`}>
                                         <div className={`${profileStyles.profilePhoto}`}>
-                                            <img className={`${profileStyles.avatar}`} src={avatar}/>
+                                            <img className={`${profileStyles.avatar}`} src={avatar} alt='profile'/>
                                             <span className={`${profileStyles.photoIconWrapper} d-flex align-items-center justify-content-center`}>
                                         <FaCamera color='#84B6A3' size='0.7em'/>
                                     </span>

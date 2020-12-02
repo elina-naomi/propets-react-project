@@ -190,20 +190,6 @@ const Navigation = () => {
                 </Nav.Link>
             </NavItem>
 
-            {/*<NavItem as='li' className={`${stylesButton.wrapper} mt-5`}>*/}
-            {/*    <Nav.Link bsPrefix={styles.linkItem}*/}
-            {/*              className='mt-3 py-1 text-white text-decoration-none'*/}
-            {/*              as={Link}*/}
-            {/*              eventKey="profile"*/}
-            {/*              to={`/${favouritesPage}`}>*/}
-            {/*        <div className='d-flex align-items-center'>*/}
-            {/*            <img className={`${stylesButton.avatar}`} src={avatar}/>*/}
-            {/*            <p className={`${stylesButton.name} ml-2`}>Ann Smith</p>*/}
-            {/*        </div>*/}
-            {/*    </Nav.Link>*/}
-            {/*        <ButtonLogOut marginLeft='ml-4' marginTop='mt-5'/>*/}
-            {/*</NavItem>*/}
-
             <ProfileBar marginTopProfileBar={styles.marginTopProfileBar}/>
         </Nav>
     );
