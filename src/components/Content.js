@@ -25,13 +25,6 @@ const Content = (props) => {
                 </Route>
             </Switch>
 
-            {/*Отображение кнопок Save и Cancel*/}
-            <Route path={`/${profilePage}`} exact>{
-                <div className='mt-4 mr-2 pb-2 float-right'>
-                    <ButtonOutlinedWhite marginRight='mr-3'/>
-                    <ButtonSaveChanges/>
-                </div>
-            }</Route>
 
 
         </div>

@@ -5,6 +5,7 @@
     font-weight: 500;
     width: max-content;
     position: relative;
+    cursor: pointer;
 }
 
 .addPostButton, .foundPetButton {
@@ -61,6 +62,7 @@
     font-size: 0.75em;
     border-radius: 17px;
     font-weight: 500;
+    cursor: pointer;
 }
 
 .outlinedButton {

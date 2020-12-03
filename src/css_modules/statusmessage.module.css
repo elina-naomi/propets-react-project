@@ -1,0 +1,9 @@
+.statusMessage {
+    font-size: 0.7em;
+    font-weight: 500;
+    color: #FF6F61;
+}
+
+.spinner, .success {
+    color: #84B6A3 !important;
+}

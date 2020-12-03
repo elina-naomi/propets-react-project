@@ -26,6 +26,11 @@
     font-size: 0.8em;
 }
 
+.inputName {
+    font-size: 1em;
+    width: 55% !important;
+}
+
 .inputs:focus {
     border-bottom: 1px solid #669885;
 

@@ -3,7 +3,8 @@ import styles from "../../css_modules/buttons.module.css";
 
 const ButtonOutlinedWhite = (props) => {
     return (
-        <a className={`${styles.formButton} ${styles.outlinedButton} ${props.marginRight}`} href="#">Cancel</a>
+        <span className={`${styles.formButton} ${styles.outlinedButton} ${props.marginRight}`}
+        >Cancel</span>
     );
 };
 
