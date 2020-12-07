@@ -1,11 +1,11 @@
 import React from 'react';
 import styles from "../css_modules/content.module.css";
 import {Route, Switch} from "react-router-dom";
-import {activitiesPage, profilePage} from "../utils/constants";
+import {activitiesPage, lostPage, mainPage, profilePage} from "../utils/constants";
 import ProfileComplex from "../reduxTools/containers/ProfileComplexContainer";
 import ContentTitle from "./ContentTitle";
-import ButtonOutlinedWhite from "./buttons/ButtonOutlinedWhite";
-import ButtonSaveChanges from "./buttons/ButtonSaveChanges";
+import SimplePost from "./posts/SimplePost"
+import LostPageContent from "./contents/LostPageContent";
 
 const Content = (props) => {
 
@@ -22,6 +22,14 @@ const Content = (props) => {
                 <Route
                     path={[`/${profilePage}`, `/${activitiesPage}`]}
                     exact component={ProfileComplex}>
+                </Route>
+                <Route
+                    path={[`/${mainPage}`]}
+                    exact><SimplePost marginTop='mt-3'/>
+                </Route>
+                <Route
+                    path={[`/${lostPage}`]}
+                    exact><LostPageContent marginTop='mt-4'/>
                 </Route>
             </Switch>
 

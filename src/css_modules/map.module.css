@@ -1,0 +1,13 @@
+.mapWrapper {
+    background: #84B6A3;
+    border-radius: 20px 0px 0px 0px;
+    height: calc(100vh - 84px);
+    position: sticky !important;
+    top: 84px;
+    margin-right: calc((1140px - 100vw - 13px)/2);
+}
+
+.expand {
+    color: white;
+    font-size: 0.75em;
+}

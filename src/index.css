@@ -4,8 +4,16 @@ body {
     font-family: 'Montserrat', sans-serif;
     font-weight: 500;
     color: #393939;
+    /*overflow-x: hidden;*/
+
 }
 
 html {
     overflow-y:scroll;
 }
+
+p{
+    margin: 0;
+}
+
+

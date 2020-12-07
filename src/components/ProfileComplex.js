@@ -45,8 +45,8 @@ const ProfileComplex = (props) => {
             avatar: avatar,
             phone: phone,
             // userLogin: email,
-            userName: name
-            // fblink: fbLink
+            userName: name,
+            fblink: fbLink
         }
         props.editUser(updatedUser, props.token, user.userLogin);
     }
@@ -155,7 +155,7 @@ const ProfileComplex = (props) => {
                                             <div>
                                                 <FormLabel htmlFor='email'
                                                            className={`${styles.label}`}>Email:</FormLabel>
-                                                <input id='email' value={email} type='text'
+                                                <input id='email' value={email} type='text' readOnly='true'
                                                        placeholder='Enter your email'
                                                        className={`ml-3 ${styles.inputs} ${profileStyles.inputs}`}
                                                        onChange={event => {

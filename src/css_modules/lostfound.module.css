@@ -1,0 +1,24 @@
+.title {
+    font-size: 1.375em;
+    color: #84B6A3;
+    font-weight: 700;
+}
+
+.descriptionItem {
+    font-size: 0.75em;
+    font-weight: 500;
+}
+
+.descriptionItem span {
+    color: #84B6A3;
+}
+
+.last {
+    border-bottom: 1px solid #BABABA;
+}
+
+.postImage {
+    object-fit: cover;
+    width: 100%;
+    height: calc(100% - 1em);
+}

@@ -1,0 +1,23 @@
+.filterInput {
+    border: 1px solid #8DBFAC;
+    border-radius: 15px;
+    font-size: 0.75em;
+    font-weight: 500;
+    outline: none;
+}
+
+.filterInput::placeholder {
+    color:  #84B6A3;
+}
+
+.twoPart {
+    width: calc(100% * 2 / 11 - 0.5em);
+}
+
+.threePart {
+    width: calc(100% * 3 / 11 - 0.5em);
+}
+
+.fourPart {
+    width: calc(100% * 4 / 11 - 0.5em) ;
+}
