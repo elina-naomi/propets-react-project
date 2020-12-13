@@ -1,11 +1,22 @@
 import React from 'react';
 import styles from "../css_modules/content.module.css";
 import {Route, Switch} from "react-router-dom";
-import {activitiesPage, lostPage, mainPage, profilePage} from "../utils/constants";
+import {
+    activitiesPage,
+    lostPage,
+    mainPage,
+    newFoundPostPage,
+    newLostPostPage,
+    newMessagePostPage,
+    profilePage
+} from "../utils/constants";
 import ProfileComplex from "../reduxTools/containers/ProfileComplexContainer";
 import ContentTitle from "./ContentTitle";
 import SimplePost from "./posts/SimplePost"
 import LostPageContent from "./contents/LostPageContent";
+import MainPageContent from "./contents/MainPageContent";
+import SimplePostForm from "../reduxTools/containers/SimplePostFormContainer";
+import LostPostForm from "./forms/LostPostForm";
 
 const Content = (props) => {
 
@@ -14,7 +25,7 @@ const Content = (props) => {
 
             {/*Отображение ContentTitle*/}
             <Route
-                path={[`/${profilePage}`, `/${activitiesPage}`]}
+                path={[`/${profilePage}`, `/${activitiesPage}`,`/${newMessagePostPage}`,`/${newLostPostPage}`, `/${newFoundPostPage}`]}
                 exact component={ContentTitle}/>
 
 
@@ -25,12 +36,21 @@ const Content = (props) => {
                 </Route>
                 <Route
                     path={[`/${mainPage}`]}
-                    exact><SimplePost marginTop='mt-3'/>
+                    exact><MainPageContent marginTop='mt-3'/>
                 </Route>
                 <Route
                     path={[`/${lostPage}`]}
                     exact><LostPageContent marginTop='mt-4'/>
                 </Route>
+                <Route
+                    path={[`/${newMessagePostPage}`]}
+                    exact><SimplePostForm/>
+                </Route>
+                <Route
+                    path={[`/${newLostPostPage}`]}
+                    exact><LostPostForm/>
+                </Route>
+
             </Switch>
 
 

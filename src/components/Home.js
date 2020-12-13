@@ -7,7 +7,7 @@ import {
     hotelsPage, lostPage,
     mainPage,
     profilePage,
-    servicesPage, vethelpPage, walkingPage
+    servicesPage, vethelpPage, walkingPage, newMessagePostPage, newLostPostPage, newFoundPostPage
 } from "../utils/constants";
 import Start from "./Start";
 import Main from "./Main";
@@ -20,15 +20,16 @@ const Home = ({token}) => {
     console.log(token);
     return (
         <div>
-            <Switch>
+            {/*Роутинг, ответственный за переброс или на стартовую страницу, или в залогиненную версию сайта (с 7 или 10 колонками)*/}
 
+            <Switch>
                 <Route exact path={['/', `/${startPage}`]}>
                     {token ? <Redirect to={`/${mainPage}`}/> : <Start signIn={() => {setModalShow(true)}}/> }
                 </Route>
 
                 <Route exact
                     path={[`/${mainPage}`, `/${profilePage}`,`/${activitiesPage}`, `/${favouritesPage}`, `/${servicesPage}/${hotelsPage}`, `/${servicesPage}/${walkingPage}`,
-                        `/${servicesPage}/${fosteringPage}`, `/${servicesPage}/${vethelpPage}`]}>
+                        `/${servicesPage}/${fosteringPage}`, `/${servicesPage}/${vethelpPage}`, `/${newMessagePostPage}`,`/${newLostPostPage}`, `/${newFoundPostPage}`]}>
 
                     {token? <Main colQuantity='col-7' bcFluid='greenBack'/> : <Redirect to={`/${startPage}`}/>}
 

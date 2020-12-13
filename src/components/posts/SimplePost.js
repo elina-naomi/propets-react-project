@@ -21,7 +21,7 @@ function cutText(text) {
 
 const SimplePost = (props) => {
     return (
-        <div className={`${styles.postWrapper} mb-1 p-3 ${props.marginTop}`}>
+        <div className={`${styles.postWrapper} mb-2 p-3`}>
             <div className={`container-sm`}>
                 <div className='row'>
                     <div className='col-1 p-0'>

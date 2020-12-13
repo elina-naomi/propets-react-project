@@ -12,6 +12,11 @@ export const walkingPage = 'walking';
 export const fosteringPage = 'fostering';
 export const vethelpPage = 'vethelp';
 
+export const newMessagePostPage = 'post';
+export const newLostPostPage = 'new-lost';
+export const newFoundPostPage = 'new-found';
+
+
 
 export const baseUrl = 'https://app-propets-account.herokuapp.com/account/en/v1';
 

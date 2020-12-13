@@ -210,7 +210,7 @@ const ProfileComplex = (props) => {
                     <span onClick={() => {
                         resetChanges();
                     }}>
-                        <ButtonOutlinedWhite marginRight='mr-3'/>
+                        <ButtonOutlinedWhite marginRight='mr-3' text='Cancel'/>
                     </span>
 
                     <span onClick={submitChanges}>

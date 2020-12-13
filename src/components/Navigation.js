@@ -20,10 +20,13 @@ const Navigation = () => {
     // При обновлении страницы чтобы соответствующий пункт навигации тоже выделялся
     const pathArray = window.location.href.split('/');
     let path = pathArray[pathArray.length - 1];
+
+    console.log(path);
     if(path==='activities') {
         path='profile';
     }
     const [key, setKey] = useState(path);
+    console.log(key);
 
     const services = ['services', 'hotels', 'walking', 'fostering', 'vethelp'];
 
@@ -34,15 +37,16 @@ const Navigation = () => {
     })
 
     useEffect(() => {
-        if (path === 'hotels' || path === 'walking' || path === 'fostering' || path === 'vethelp') {
+        if(pathArray.includes('services')) {
+        // if (path === 'hotels' || path === 'walking' || path === 'fostering' || path === 'vethelp') {
             setSubmenuExpanded({
                 display: '',
                 greenWrapper: 'greenWrapper',
                 servicesItem: 'servicesItem'
             })
         }
-        return () => console.log('Component Home is unmounted');
-    }, [path]);
+        return () => console.log('Component Navigation is unmounted');
+    }, [key]);
 
 
     return (
