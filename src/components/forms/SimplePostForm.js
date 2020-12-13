@@ -6,6 +6,8 @@ import {FaPlus, FaTimes, FiUpload} from "react-icons/all";
 import ButtonOutlinedWhite from "../buttons/ButtonOutlinedWhite";
 import ButtonPublish from "../buttons/ButtonPublish";
 import {Spinner} from "react-bootstrap";
+import DragAndDrop from "../DragAndDrop";
+import {baseUrl, baseUrl2, baseUrlMessaging} from "../../utils/constants";
 
 
 const iconPlusPositions = ['iconPlus1', 'iconPlus2', 'iconPlus3', 'iconPlus4', 'iconPlusNonDisplay'];
@@ -13,15 +15,54 @@ const iconPlusPositions = ['iconPlus1', 'iconPlus2', 'iconPlus3', 'iconPlus4', '
 
 const SimplePostForm = (props) => {
 
-    console.log(props);
     const [text, setText] = useState('');
     const [pictures, setPictures] = useState([]);
     const [uploadMessage, setUploadMessage] = useState('');
     const [iconPosition, setIconPosition] = useState(0);
-    const [inDropZone, setInDropZone] = useState(false);
-    let dragCounter = 0;
 
-    console.log(pictures);
+    function publishPost() {
+        if (text) {
+            const newPost = {
+                userName: props.userName,
+                avatar: props.avatar,
+                text,
+                images: pictures.map(p => p.photo)
+            }
+            createSimplePost(props.token, props.email, newPost);
+        }
+    }
+
+    function createSimplePost(token, login, newPost) {
+        console.log(newPost);
+        setUploadMessage('loading...');
+        fetch(`${baseUrlMessaging}/post/${login}`, {
+            method: 'POST',
+            body: JSON.stringify(newPost),
+            headers: {
+                'Content-Type': 'application/json',
+                'X-Token': token
+            }
+        })
+            .then(response => {
+                if (response.ok) {
+                    console.log('ok');
+                    return response.json()
+                } else {
+                    throw new Error('Failed to post message');
+                }
+            })
+            .then(post => {
+                console.log(post);
+                setUploadMessage('');
+                setText('');
+                setPictures([]);
+                setIconPosition(0);
+            })
+            .catch(e => {
+                setUploadMessage(e.message)
+            });
+    }
+
 
     function cutTitle(title) {
         const size = 12;
@@ -45,43 +86,44 @@ const SimplePostForm = (props) => {
 
     }
 
-    function uploadPhotosHandler(imageFile) {
-        // const imageFile = event.target.files[0];
-        if (pictures.length < 4) {
-            const formData = new FormData();
-            formData.append('image', imageFile);
-            setUploadMessage('loading...')
-            fetch('https://api.imgur.com/3/image', {
-                method: 'POST',
-                // mode: 'cors', // no-cors, *cors, same-origin
-                headers: new Headers({
-                    Authorization: 'Client-ID 6c621154e3dcbc7'
-                }),
-                body: formData
-            }).then(response => {
-                if (response.ok) {
-                    console.log(response);
-                    return response.json();
+    async function uploadPhotosHandler(photos) {
+        // Если кол-во загружаемых фото меньше или равно кол-ву оставшегося места для фото
+        if (photos.length <= (4 - pictures.length)) {
+            const newArray = [...pictures];
+            try {
+                for (let i = 0; i < photos.length; i++) {
+                    const formData = new FormData();
+                    formData.append('image', photos[i]);
+                    setUploadMessage('loading...');
+                    const response = await fetch('https://api.imgur.com/3/image', {
+                        method: 'POST',
+                        // mode: 'cors', // no-cors, *cors, same-origin
+                        headers: new Headers({
+                            Authorization: 'Client-ID 6c621154e3dcbc7'
+                        }),
+                        body: formData
+                    });
+                    const result = await response.json();
+                    const photo = result.data.link;
+                    console.log(photo);
+
+                    newArray.push({
+                        name: photos[i].name,
+                        photo
+                    });
+
                 }
-            }).then(result => {
-                const photo = result.data.link;
-                console.log(photo);
-                const newArray = [...pictures];
-                newArray.push({
-                    name: imageFile.name,
-                    photo
-                });
                 setPictures(newArray);
+                setIconPosition(iconPosition + photos.length);
                 setUploadMessage('');
-                setIconPosition(iconPosition + 1);
-            })
-                .catch(error => {
-                    console.log(error.message);
-                    setUploadMessage('Uploading error')
-                });
+            } catch (error) {
+                console.log(error.message);
+                setUploadMessage('Uploading error')
+            }
         } else {
             setUploadMessage('up to 4 photos only')
         }
+
     }
 
     function displayPhotoGallery() {
@@ -127,50 +169,12 @@ const SimplePostForm = (props) => {
 
     }
 
-    const handleDragEnter = e => {
-        e.preventDefault();
-        e.stopPropagation();
-        dragCounter++;
-        if (e.dataTransfer.items && e.dataTransfer.items.length > 0) {
-            setInDropZone(true);
-        }
-    };
-    const handleDragLeave = e => {
-        e.preventDefault();
-        e.stopPropagation();
-        console.log(dragCounter);
-        dragCounter--;
-        console.log(dragCounter);
-        if (dragCounter < 0) {
-            setInDropZone(false);
-        }
-    };
-    const handleDragOver = e => {
-        e.preventDefault();
-        e.stopPropagation();
-    };
-    const handleDrop = e => {
-        e.preventDefault();
-        e.stopPropagation();
-        setInDropZone(false);
-        if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
-            console.log(e.dataTransfer.files);
-            const file = [...e.dataTransfer.files][0];
-            e.dataTransfer.clearData();
-            dragCounter = 0;
-            uploadPhotosHandler(file);
-        }
-    };
-
     return (
         <div className='row mx-2'>
-            <div
-                className={inDropZone ? `${styles.formWrapperHideAllChild} container-sm ${styles.formWrapper} py-3 pr-4 ${styles.insideDragArea}`
-                    : `container-sm ${styles.formWrapper} py-3 pr-4`}
-                onDrop={e => handleDrop(e)}
-                onDragOver={e => handleDragOver(e)}
-                onDragEnter={e => handleDragEnter(e)}
-                onDragLeave={e => handleDragLeave(e)}>
+
+            <DragAndDrop uploadPhotosHandler={uploadPhotosHandler}
+                         isInDropZoneStyle={`${styles.formWrapperHideAllChild} container-sm ${styles.formWrapper} py-3 pr-4 ${styles.insideDragArea}`}
+                         notInDropZoneStyle={`container-sm ${styles.formWrapper} py-3 pr-4`}>
                 <div className='row mb-3'>
                     <div className='col-2 text-right p-0'>
                         <label htmlFor='text' className={`${styles.labels} mb-0`}>Text:</label>
@@ -200,7 +204,7 @@ const SimplePostForm = (props) => {
                                    className={`${styles.iconPlus} ${styles[iconPlusPositions[iconPosition]]} mb-0`}>
                                 <input
                                     onChange={event => {
-                                        uploadPhotosHandler(event.target.files[0]);
+                                        return uploadPhotosHandler(event.target.files);
 
                                     }}
                                     type="file" name="photoUploader" id="photoUploader" className='d-none'/>
@@ -226,7 +230,7 @@ const SimplePostForm = (props) => {
                             <input
                                 onChange={event => {
                                     if (pictures.length < 4) {
-                                        uploadPhotosHandler(event.target.files[0]);
+                                        return uploadPhotosHandler(event.target.files);
                                     } else {
                                         console.log('up to 4 photos only');
                                         setUploadMessage('up to 4 photos only')
@@ -272,11 +276,16 @@ const SimplePostForm = (props) => {
                     </div>
 
                     <div className='col-auto d-flex align-items-center'>
-                        <ButtonPublish/>
+                        <span
+                            onClick={publishPost}
+                        >
+                            <ButtonPublish/>
+                        </span>
                     </div>
 
                 </div>
-            </div>
+            </DragAndDrop>
+
         </div>
     );
 };

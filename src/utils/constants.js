@@ -19,6 +19,7 @@ export const newFoundPostPage = 'new-found';
 
 
 export const baseUrl = 'https://app-propets-account.herokuapp.com/account/en/v1';
+export const baseUrlMessaging = 'https://app-propets-messaging.herokuapp.com/message/en/v1'
 
 export const createToken = (login, password) => {
     return 'Basic ' + btoa(`${login}:${password}`);

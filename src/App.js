@@ -9,6 +9,7 @@ import {Spinner} from "react-bootstrap";
 const App = (props) => {
     const token = localStorage.getItem('token');
 
+
     console.log(props);
 
     useEffect(() => {

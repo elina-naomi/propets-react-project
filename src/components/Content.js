@@ -24,6 +24,7 @@ const Content = (props) => {
         <div className={`${props.colQuantity} bg-white ${styles.mainContent} `}>
 
             {/*Отображение ContentTitle*/}
+            {/*Добавить также в Services (Hotels, Walking, Fostering, VetHelp) & Favourites, Confirmation lost/found post*/}
             <Route
                 path={[`/${profilePage}`, `/${activitiesPage}`,`/${newMessagePostPage}`,`/${newLostPostPage}`, `/${newFoundPostPage}`]}
                 exact component={ContentTitle}/>

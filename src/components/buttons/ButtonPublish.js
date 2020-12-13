@@ -6,9 +6,8 @@ import {newFoundPostPage} from "../../utils/constants";
 
 const ButtonPublish = () => {
     return (
-        <Link to={``} className={`${buttonStyles.functionButton} ${buttonStyles.foundPetButton} px-5`}>
-            <FaPaw color='white' className={`${buttonStyles.buttonIcon}`}/>Publish
-        </Link>
+        <span className={`${buttonStyles.functionButton} ${buttonStyles.foundPetButton} ${buttonStyles.publishButton} px-5`}>
+            <FaPaw color='white' className={`${buttonStyles.buttonIcon}`}/>Publish</span>
     );
 };
 

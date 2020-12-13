@@ -8,7 +8,7 @@ import {newMessagePostPage} from "../../utils/constants";
 const ButtonAddNewPost = () => {
     return (
 
-        <Link to={`/${newMessagePostPage}`}
+        <Link to={`/${newMessagePostPage}` }
               className={`${buttonStyles.functionButton} ${buttonStyles.addPostButton}`}>
             <FaPlus color='white' className={`${buttonStyles.buttonIcon}`}/>Add new
         </Link>

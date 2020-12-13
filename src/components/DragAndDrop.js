@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 
 const DragAndDrop = (props) => {
+
     const [inDropZone, setInDropZone] = useState(false);
     let dragCounter = 0;
 
@@ -32,19 +33,22 @@ const DragAndDrop = (props) => {
         setInDropZone(false);
         if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
             console.log(e.dataTransfer.files);
-            const file = [...e.dataTransfer.files][0];
+            const files = [...e.dataTransfer.files];
             e.dataTransfer.clearData();
             dragCounter = 0;
-            props.uploadPhotosHandler(file);
+            props.uploadPhotosHandler(files);
         }
     };
 
+
     return (
-        <div onDrop={e => handleDrop(e)}
+        <div
+            className={inDropZone ? props.isInDropZoneStyle : props.notInDropZoneStyle}
+            onDrop={e => handleDrop(e)}
              onDragOver={e => handleDragOver(e)}
              onDragEnter={e => handleDragEnter(e)}
              onDragLeave={e => handleDragLeave(e)}>
-            
+            {props.children}
         </div>
     );
 };

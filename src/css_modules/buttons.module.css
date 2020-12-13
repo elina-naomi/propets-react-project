@@ -27,6 +27,11 @@
 
 }
 
+.publishButton {
+    padding: 0.7em 2.5em 0.7em 3.5em;
+
+}
+
 .addPostButton:hover, .foundPetButton:hover, .logoutButton:hover, .saveChangesButton:hover {
     color: white;
 }
