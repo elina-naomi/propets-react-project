@@ -84,7 +84,7 @@ const ProfileComplex = (props) => {
                        }}/>
                 <FaPencilAlt
                     onClick={()=>setIsNameEdit(false)}
-                    color='#BABABA' size='0.7em' className='ml-2'/>
+                    color='#BABABA' size='0.7em' className={`ml-2 ${profileStyles.pencil}`}/>
             </Fragment>
 
         }else {
@@ -92,7 +92,7 @@ const ProfileComplex = (props) => {
                 <p className={`${profileStyles.name} ml-4`}>{name}</p>
                 <FaPencilAlt
                     onClick={()=>setIsNameEdit(true)}
-                    color='#BABABA' size='0.7em' className='ml-2'/>
+                    color='#BABABA' size='0.7em' className={`ml-2 ${profileStyles.pencil}`}/>
             </Fragment>
         }
     }

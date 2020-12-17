@@ -7,7 +7,9 @@ import ButtonOutlinedWhite from "../buttons/ButtonOutlinedWhite";
 import ButtonPublish from "../buttons/ButtonPublish";
 import {Spinner} from "react-bootstrap";
 import DragAndDrop from "../DragAndDrop";
-import {baseUrl, baseUrl2, baseUrlMessaging} from "../../utils/constants";
+import {baseUrl, baseUrl2, baseUrlMessaging, displayMessage, mainPage, startPage} from "../../utils/constants";
+import {Redirect, Route} from "react-router-dom";
+import Start from "../Start";
 
 
 const iconPlusPositions = ['iconPlus1', 'iconPlus2', 'iconPlus3', 'iconPlus4', 'iconPlusNonDisplay'];
@@ -29,6 +31,7 @@ const SimplePostForm = (props) => {
                 images: pictures.map(p => p.photo)
             }
             createSimplePost(props.token, props.email, newPost);
+
         }
     }
 
@@ -53,10 +56,10 @@ const SimplePostForm = (props) => {
             })
             .then(post => {
                 console.log(post);
-                setUploadMessage('');
                 setText('');
                 setPictures([]);
                 setIconPosition(0);
+                setUploadMessage('done');
             })
             .catch(e => {
                 setUploadMessage(e.message)
@@ -73,18 +76,18 @@ const SimplePostForm = (props) => {
         return title;
     }
 
-    function displayMessage(message) {
-
-        // Если загрузка
-        if (message === 'loading...') {
-            return <Spinner animation="border" size="sm" className={stylesMessage.spinner}/>
-        }
-        // Если сообщение с ошибкой, или его нет
-        else {
-            return <span className={stylesMessage.statusMessage}>{message}</span>;
-        }
-
-    }
+    // function displayMessage(message) {
+    //
+    //     // Если загрузка
+    //     if (message === 'loading...') {
+    //         return <Spinner animation="border" size="sm" className={stylesMessage.spinner}/>
+    //     }
+    //     // Если сообщение с ошибкой, или его нет
+    //     else {
+    //         return <span className={stylesMessage.statusMessage}>{message}</span>;
+    //     }
+    //
+    // }
 
     async function uploadPhotosHandler(photos) {
         // Если кол-во загружаемых фото меньше или равно кол-ву оставшегося места для фото
@@ -169,18 +172,25 @@ const SimplePostForm = (props) => {
 
     }
 
-    return (
-        <div className='row mx-2'>
+    if(uploadMessage==='done') {
+        return (
+            <Redirect to={`/${mainPage}`}/>
+        )
+    }
+    else
+        return (
+        <Fragment>
+            <div className='row mx-2'>
 
-            <DragAndDrop uploadPhotosHandler={uploadPhotosHandler}
-                         isInDropZoneStyle={`${styles.formWrapperHideAllChild} container-sm ${styles.formWrapper} py-3 pr-4 ${styles.insideDragArea}`}
-                         notInDropZoneStyle={`container-sm ${styles.formWrapper} py-3 pr-4`}>
-                <div className='row mb-3'>
-                    <div className='col-2 text-right p-0'>
-                        <label htmlFor='text' className={`${styles.labels} mb-0`}>Text:</label>
-                        <p className={`${styles.prompts}`}>up to 1500 char</p>
-                    </div>
-                    <div className='col-10'>
+                <DragAndDrop uploadPhotosHandler={uploadPhotosHandler}
+                             isInDropZoneStyle={`${styles.formWrapperHideAllChild} container-sm ${styles.formWrapper} py-3 pr-4 ${styles.insideDragArea}`}
+                             notInDropZoneStyle={`container-sm ${styles.formWrapper} py-3 pr-4`}>
+                    <div className='row mb-3'>
+                        <div className='col-2 text-right p-0'>
+                            <label htmlFor='text' className={`${styles.labels} mb-0`}>Text:</label>
+                            <p className={`${styles.prompts}`}>up to 1500 char</p>
+                        </div>
+                        <div className='col-10'>
                         <textarea id='text' value={text}
                                   placeholder='Enter your text'
                                   className={`${styles.inputs} ${styles.inputText} p-2`}
@@ -190,103 +200,105 @@ const SimplePostForm = (props) => {
 
 
                         />
-                    </div>
-                </div>
-                <div className='row mb-4'>
-                    <div className='col-2 text-right p-0'>
-                        <label htmlFor='photos' className={`${styles.labels} mb-0`}>Photos:</label>
-                        <p className={`${styles.prompts}`}>up to 4 images</p>
-                    </div>
-                    <div className='col-4'>
-                        <div className={`container-fluid ${styles.photoWrapper}`}>
-
-                            <label htmlFor="photoUploader"
-                                   className={`${styles.iconPlus} ${styles[iconPlusPositions[iconPosition]]} mb-0`}>
-                                <input
-                                    onChange={event => {
-                                        return uploadPhotosHandler(event.target.files);
-
-                                    }}
-                                    type="file" name="photoUploader" id="photoUploader" className='d-none'/>
-                                <FaPlus color='white' size='1em'
-                                />
-
-                            </label>
-
-
-                            <div className='row'>
-                                {displayPhotoGallery()}
-                            </div>
                         </div>
                     </div>
-                    <div
-                        className={`col-3 d-flex flex-wrap flex-column align-items-center text-center justify-content-between`}>
+                    <div className='row mb-4'>
+                        <div className='col-2 text-right p-0'>
+                            <label htmlFor='photos' className={`${styles.labels} mb-0`}>Photos:</label>
+                            <p className={`${styles.prompts}`}>up to 4 images</p>
+                        </div>
+                        <div className='col-4'>
+                            <div className={`container-fluid ${styles.photoWrapper}`}>
+
+                                <label htmlFor="photoUploader"
+                                       className={`${styles.iconPlus} ${styles[iconPlusPositions[iconPosition]]} mb-0`}>
+                                    <input
+                                        onChange={event => {
+                                            return uploadPhotosHandler(event.target.files);
+
+                                        }}
+                                        type="file" name="photoUploader" id="photoUploader" className='d-none'/>
+                                    <FaPlus color='white' size='1em'
+                                    />
+
+                                </label>
 
 
-                        <FiUpload color='#84B6A3' size='2em'/>
-                        <p className={`${styles.dragdropdescrp}`}>Drag and drop photos or</p>
+                                <div className='row'>
+                                    {displayPhotoGallery()}
+                                </div>
+                            </div>
+                        </div>
+                        <div
+                            className={`col-3 d-flex flex-wrap flex-column align-items-center text-center justify-content-between`}>
 
-                        <label className='mb-0' htmlFor="photoUploader">
-                            <input
-                                onChange={event => {
-                                    if (pictures.length < 4) {
-                                        return uploadPhotosHandler(event.target.files);
-                                    } else {
-                                        console.log('up to 4 photos only');
-                                        setUploadMessage('up to 4 photos only')
-                                    }
-                                }}
-                                type="file" name="photoUploader" id="photoUploader" className='d-none'/>
-                            <span className='pb-3'>
+
+                            <FiUpload color='#84B6A3' size='2em'/>
+                            <p className={`${styles.dragdropdescrp}`}>Drag and drop photos or</p>
+
+                            <label className='mb-0' htmlFor="photoUploader">
+                                <input
+                                    onChange={event => {
+                                        if (pictures.length < 4) {
+                                            return uploadPhotosHandler(event.target.files);
+                                        } else {
+                                            console.log('up to 4 photos only');
+                                            setUploadMessage('up to 4 photos only')
+                                        }
+                                    }}
+                                    type="file" name="photoUploader" id="photoUploader" className='d-none'/>
+                                <span className='pb-3'>
                                 <ButtonOutlinedWhite text='Browse'/>
                             </span>
 
-                        </label>
-                    </div>
-                    <div className='col-3'>
-                        <div className={`${styles.photoListWrapper} container`}>
-                            {pictures.map((item, index) =>
-                                <div key={index}
-                                     className={`${styles.photoItem} row align-items-center justify-content-between px-1`}>
-                                    <span>{cutTitle(item.name)}</span>
-                                    <span onClick={() => {
-                                        const newPicturesArray = [...pictures];
-                                        newPicturesArray.splice(index, 1);
-                                        setPictures(newPicturesArray);
-                                        setIconPosition(iconPosition - 1);
-                                    }}>
+                            </label>
+                        </div>
+                        <div className='col-3'>
+                            <div className={`${styles.photoListWrapper} container`}>
+                                {pictures.map((item, index) =>
+                                    <div key={index}
+                                         className={`${styles.photoItem} row align-items-center justify-content-between px-1`}>
+                                        <span>{cutTitle(item.name)}</span>
+                                        <span onClick={() => {
+                                            const newPicturesArray = [...pictures];
+                                            newPicturesArray.splice(index, 1);
+                                            setPictures(newPicturesArray);
+                                            setIconPosition(iconPosition - 1);
+                                        }}>
                                         <FaTimes color='#BABABA' size='0.8em'/>
                                     </span>
-                                </div>)}
-                        </div>
+                                    </div>)}
+                            </div>
 
-                    </div>
-                </div>
-                <div className='row justify-content-between'>
-                    <div className='col-auto d-flex align-items-center'>
-                        <img className={`${profileStyles.avatar} float-left mr-3`} src={props.avatar} alt='profile'/>
-
-                        <div>
-                            <p className={`${styles.authorName}`}>{props.userName}</p>
                         </div>
                     </div>
+                    <div className='row justify-content-between'>
+                        <div className='col-auto d-flex align-items-center'>
+                            <img className={`${profileStyles.avatar} float-left mr-3`} src={props.avatar} alt='profile'/>
 
-                    <div className='col-auto d-flex align-items-center'>
-                        {displayMessage(uploadMessage)}
-                    </div>
+                            <div>
+                                <p className={`${styles.authorName}`}>{props.userName}</p>
+                            </div>
+                        </div>
 
-                    <div className='col-auto d-flex align-items-center'>
+                        <div className='col-auto d-flex align-items-center'>
+                            {displayMessage(uploadMessage)}
+                        </div>
+
+                        <div className='col-auto d-flex align-items-center'>
                         <span
                             onClick={publishPost}
                         >
                             <ButtonPublish/>
                         </span>
+                        </div>
+
                     </div>
+                </DragAndDrop>
 
-                </div>
-            </DragAndDrop>
+            </div>
+        </Fragment>
 
-        </div>
     );
 };
 

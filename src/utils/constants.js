@@ -1,3 +1,7 @@
+import {Spinner} from "react-bootstrap";
+import stylesMessage from "../css_modules/statusmessage.module.css";
+import React from "react";
+
 export const startPage = 'home';
 export const mainPage = 'main';
 export const lostPage = 'lost';
@@ -24,3 +28,16 @@ export const baseUrlMessaging = 'https://app-propets-messaging.herokuapp.com/mes
 export const createToken = (login, password) => {
     return 'Basic ' + btoa(`${login}:${password}`);
 };
+
+export const displayMessage= (message) => {
+
+    // Если загрузка
+    if (message === 'loading...') {
+        return <Spinner animation="border" size="sm" className={stylesMessage.spinner}/>
+    }
+    // Если сообщение с ошибкой, или его нет
+    else {
+        return <span className={stylesMessage.statusMessage}>{message}</span>;
+    }
+
+}

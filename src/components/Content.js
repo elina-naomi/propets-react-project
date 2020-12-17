@@ -14,9 +14,9 @@ import ProfileComplex from "../reduxTools/containers/ProfileComplexContainer";
 import ContentTitle from "./ContentTitle";
 import SimplePost from "./posts/SimplePost"
 import LostPageContent from "./contents/LostPageContent";
-import MainPageContent from "./contents/MainPageContent";
+import MainPageContent from "../reduxTools/containers/MainPageContentContainer";
 import SimplePostForm from "../reduxTools/containers/SimplePostFormContainer";
-import LostPostForm from "./forms/LostPostForm";
+import LostPostForm from "../reduxTools/containers/LostPostFormContainer";
 
 const Content = (props) => {
 
@@ -35,10 +35,13 @@ const Content = (props) => {
                     path={[`/${profilePage}`, `/${activitiesPage}`]}
                     exact component={ProfileComplex}>
                 </Route>
+                {/*<Route path={['/', `/${homePage}`, `/${homePage}/:hero`]} exact render={({match}) => <Home match={match} changeHero={props.changeHero}/>}/>*/}
+
                 <Route
-                    path={[`/${mainPage}`]}
-                    exact><MainPageContent marginTop='mt-3'/>
-                </Route>
+                    path={[`/${mainPage}`,`/${mainPage}/:number`]} exact render={({match}) =>
+                    <MainPageContent match={match} marginTop='mt-3' location={props.location}/>}/>
+                {/*><MainPageContent marginTop='mt-3'/>*/}
+                {/*</Route>*/}
                 <Route
                     path={[`/${lostPage}`]}
                     exact><LostPageContent marginTop='mt-4'/>

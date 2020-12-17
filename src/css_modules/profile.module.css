@@ -30,8 +30,13 @@
     position: absolute;
     bottom: 0;
     right: 0;
+    cursor: pointer;
 }
 
 .profilePhoto {
     position: relative;
+}
+
+.pencil {
+    cursor: pointer;
 }

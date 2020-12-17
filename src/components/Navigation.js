@@ -16,78 +16,45 @@ import {
 } from "../utils/constants";
 import ProfileBar from "../reduxTools/containers/ProfileBarContainer";
 
-const Navigation = () => {
-    // При обновлении страницы чтобы соответствующий пункт навигации тоже выделялся
-    const pathArray = window.location.href.split('/');
-    let path = pathArray[pathArray.length - 1];
+const Navigation = ({location}) => {
 
-    console.log(path);
-    if(path==='activities') {
-        path='profile';
-    }
-    const [key, setKey] = useState(path);
-    console.log(key);
-
-    const services = ['services', 'hotels', 'walking', 'fostering', 'vethelp'];
-
-    const [submenuExpanded, setSubmenuExpanded] = useState({
+    const initialSubmenuState = {
         display: 'd-none',
-        greenWrapper: '',
-        servicesItem: ''
-    })
+        greenWrapper: ''
+    };
+
+    const [submenuExpanded, setSubmenuExpanded] = useState(initialSubmenuState);
 
     useEffect(() => {
-        if(pathArray.includes('services')) {
-        // if (path === 'hotels' || path === 'walking' || path === 'fostering' || path === 'vethelp') {
+        if(location.pathname.includes('services')) {
             setSubmenuExpanded({
                 display: '',
                 greenWrapper: 'greenWrapper',
                 servicesItem: 'servicesItem'
             })
+        } else {
+            setSubmenuExpanded(initialSubmenuState);
         }
-        return () => console.log('Component Navigation is unmounted');
-    }, [key]);
+        return () => {
+            console.log('Component Navigation is unmounted');
+        }
+    },[location]);
 
 
     return (
         <Nav
-            onSelect={(selectedKey) => {
-                setKey(selectedKey);
-                if (selectedKey === "services") {
-                    setSubmenuExpanded({
-                        display: '',
-                        greenWrapper: 'greenWrapper',
-                        servicesItem: 'servicesItem'
-                    })
-                }
-                // Проверка, что не нажат пункт меню, не входящий в Services. Если так, скрыть подменю
-                let res = false;
-                for (let i = 0; i < services.length; i++) {
-                    res = res || selectedKey === services[i];
-                    if (res) {
-                        break;
-                    }
-                }
-                if (!res) {
-                    setSubmenuExpanded({
-                        display: 'd-none',
-                        greenWrapper: '',
-                        servicesItem: ''
-                    });
-                }
-
-
-            }}
             as='ul'
-            activeKey={key}
+            activeKey={location.pathname.split('/')[1]}
+
             bsPrefix={`${styles.sideBarNav} mt-3 pl-0`}
             className='leftNavigation'>
             <NavItem as='li'>
                 <Nav.Link bsPrefix={styles.linkItem}
                           className='py-1 text-white  text-decoration-none'
                           as={Link}
-                          eventKey="main"
-                          to={`/${mainPage}`}>
+                          eventKey={'main'}
+                          to={`/${mainPage}`}
+                >
                     <FaHome className='mr-3'/>Home
                 </Nav.Link>
             </NavItem>
@@ -95,7 +62,7 @@ const Navigation = () => {
                 <Nav.Link bsPrefix={styles.linkItem}
                           className='py-1 text-white  text-decoration-none'
                           as={Link}
-                          eventKey="lost"
+                          eventKey={'lost'}
                           to={`/${lostPage}`}
                 >
                     <FaSearch className='mr-3'/>Lost
@@ -106,7 +73,7 @@ const Navigation = () => {
                 <Nav.Link bsPrefix={styles.linkItem}
                           className='py-1 text-white  text-decoration-none'
                           as={Link}
-                          eventKey="found"
+                          eventKey={'found'}
                           to={`/${foundPage}`}>
                     <FaPaw className='mr-3'/>Found
                 </Nav.Link>
@@ -120,20 +87,19 @@ const Navigation = () => {
                     <Nav.Link bsPrefix={styles.linkItem}
                               className='text-white text-decoration-none'
                               as={Link}
-                              eventKey="services">
+                              eventKey='services'
+                              to={`/${servicesPage}/${hotelsPage}`}>
 
-                        <div className={`py-1 ${styles[submenuExpanded.servicesItem]}`}>
+                        <div className={`py-1`}>
                             <FaBullhorn className='mr-3'/>Services
                         </div>
 
                     </Nav.Link>
 
 
-                    <Nav onSelect={eventKey => {
-                        setKey(eventKey)
-
-                    }} bsPrefix={styles.linkItem}
-                         activeKey={key}
+                    <Nav
+                        bsPrefix={styles.linkItem}
+                         activeKey={location.pathname.split('/')[2]}
                          className={`py-1 text-white 
                          ${styles.subMenu} subMenu 
                          ${submenuExpanded.display}`}
@@ -142,7 +108,7 @@ const Navigation = () => {
                             <Nav.Link bsPrefix={styles.linkItem}
                                       className='pt-1 text-white text-decoration-none'
                                       as={Link}
-                                      eventKey="hotels"
+                                      eventKey={`hotels`}
                                       to={`/${servicesPage}/${hotelsPage}`}>
                                 <FaHotel className='mr-3'/>Hotels
                             </Nav.Link>
@@ -152,7 +118,7 @@ const Navigation = () => {
                             <Nav.Link bsPrefix={styles.linkItem}
                                       className='text-white text-decoration-none'
                                       as={Link}
-                                      eventKey="walking"
+                                      eventKey={`walking`}
                                       to={`/${servicesPage}/${walkingPage}`}>
                                 <FaWalking className='mr-3'/>Walking
                             </Nav.Link>
@@ -162,7 +128,7 @@ const Navigation = () => {
                             <Nav.Link bsPrefix={styles.linkItem}
                                       className='text-white text-decoration-none'
                                       as={Link}
-                                      eventKey="fostering"
+                                      eventKey={`fostering`}
                                       to={`/${servicesPage}/${fosteringPage}`}>
                                 <FaDog className='mr-3'/>Fostering
                             </Nav.Link>
@@ -172,15 +138,14 @@ const Navigation = () => {
                             <Nav.Link bsPrefix={styles.linkItem}
                                       className='pb-1 text-white text-decoration-none'
                                       as={Link}
-                                      eventKey="vethelp"
-                                      to={`/${servicesPage}/${vethelpPage}`}>
+                                      eventKey={`vethelp`}
+                                      to={`/${servicesPage}/${vethelpPage}`}
+                            >
                                 <FaStethoscope className='mr-3'/>VetHelp
                             </Nav.Link>
                         </NavItem>
                     </Nav>
                 </div>
-
-
             </NavItem>
 
 
@@ -188,13 +153,13 @@ const Navigation = () => {
                 <Nav.Link bsPrefix={styles.linkItem}
                           className='py-1 text-white text-decoration-none'
                           as={Link}
-                          eventKey="favourites"
+                          eventKey={'favourites'}
                           to={`/${favouritesPage}`}>
                     <FaStar className='mr-3'/>Favourites
                 </Nav.Link>
             </NavItem>
 
-            <ProfileBar marginTopProfileBar={styles.marginTopProfileBar}/>
+            <ProfileBar marginTopProfileBar={styles.marginTopProfileBar} location={location}/>
         </Nav>
     );
 };

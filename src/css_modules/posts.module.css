@@ -24,6 +24,7 @@
 .more {
     color: #84B6A3;
     white-space: nowrap;
+    cursor: pointer;
 }
 
 .moreIcon {

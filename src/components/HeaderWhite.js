@@ -38,7 +38,7 @@ const HeaderWhite = () => {
                         <Nav className="ml-auto">
                             <Switch>
                                 <Route
-                                    path={[`/${mainPage}`, `/${favouritesPage}`, `/${servicesPage}/${hotelsPage}`, `/${servicesPage}/${walkingPage}`,
+                                    path={[`/${mainPage}`, `/${mainPage}/:number`, `/${favouritesPage}`, `/${servicesPage}/${hotelsPage}`, `/${servicesPage}/${walkingPage}`,
                                         `/${servicesPage}/${fosteringPage}`, `/${servicesPage}/${vethelpPage}`]}
                                     exact component={ButtonAddNewPost}/>
                                 <Route path={[`/${lostPage}`, `/${foundPage}`]} exact>{

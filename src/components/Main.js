@@ -15,9 +15,9 @@ const Main = (props) => {
                 <div className='row'>
                     <div className='container-xl'>
                         <div className='row'>
-                            <SideBarLeft/>
+                            <SideBarLeft location={props.location}/>
                             {/*В Content должна передаваться информация о кол-ве занимаемых колонок (7 или 10)*/}
-                            <Content colQuantity={props.colQuantity}/>
+                            <Content colQuantity={props.colQuantity} location={props.location}/>
                             <SideBarRight className={props.isShow}/>
                         </div>
                     </div>

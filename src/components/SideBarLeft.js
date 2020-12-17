@@ -1,10 +1,10 @@
 import React from 'react';
 import Navigation from "./Navigation";
 
-const SideBarLeft = () => {
+const SideBarLeft = (props) => {
     return (
         <div className={`col-2`}>
-            <Navigation/>
+            <Navigation  location={props.location}/>
         </div>
     );
 };

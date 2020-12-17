@@ -1,0 +1,50 @@
+.selects {
+    width: 50%;
+    color: #393939;
+    font-size: 0.75em;
+    font-weight: 500;
+    border: 0px;
+    outline: 0px;
+}
+.selects::placeholder {
+    color: #393939;
+}
+
+.inputLine {
+    width: 100%;
+    color: #BABABA;
+    font-size: 0.75em;
+    font-weight: 500;
+    border: none;
+    border-bottom: 1px solid #84B6A3;
+    outline: none;
+}
+
+.inputLine::placeholder {
+    color: #BABABA;
+}
+
+.inputs {
+    border: 1px solid #8DBFAC;
+    width: 100%;
+    color: #BABABA;
+    font-size: 0.75em;
+    font-weight: 500;
+    min-height: 2.7em;
+}
+.inputs::placeholder {
+    color: #BABABA;
+}
+
+.inputDescr {
+    min-height: 9em;
+}
+
+.divider {
+    height: 1px;
+    background-color: #c8c8c8;
+}
+
+.photoWrapper {
+    height: 125px;
+}
